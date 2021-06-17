@@ -1,0 +1,26 @@
+.box_report
+  p.big
+   b Objectives met
+  - each_events_goal.each do |goal_id, goal|
+    .row-fluid
+      .span5
+        .report-kpi-chart-name
+          = goal[:goal].kpi.name
+        .report-kpi-chart-legend
+
+        .report-kpi-chart-bar
+          span.legend
+            - if goal[:goal].kpi.currency?
+              = "#{number_to_currency(goal[:remaining_count], precision: 2)} of #{number_to_currency(goal[:goal].value, precision: 2)} remaining"
+            - else
+              = "#{number_with_delimiter(goal[:remaining_count].round)} of #{number_with_delimiter(goal[:goal].value.round)} remaining"
+          .progress
+            .bar style="width: #{goal[:completed_percentage]}%"
+            .bar.bar-remaining style="width: #{goal[:remaining_percentage]}%"
+          span.total
+            - if goal[:goal].kpi.currency?
+              = number_to_currency(goal[:goal].value, precision: 2)
+            - else
+              = number_with_delimiter(goal[:goal].value.round)
+      .span6.description.pull-right #{goal[:completed_percentage].round}% completed
+

@@ -1,0 +1,68 @@
+/ = user_new_feature('users_list') do
+/   h5 USERS ADMIN
+/   a.close.btn-dismiss-alert.icon.icon-close href="#" title="Dismiss"
+/   a.video-thumbnail href="#" title="Play Video" data-video="//www.youtube.com/embed/l0XvR-Ray_4?rel=0" data-width="640" data-height="360"
+/     img src="#{image_path('video_arrow.png')}" width="70" height="70" /
+/   .feature-description
+/     p
+/       'The User section is all about managing your users. Add new users, deactivate users, and approve user-specific permissions by clicking the "Invite User" button and selecting users from the list below. Click on the video to the left for a quick overview or visit our
+/       a> href="http://support.app.com" target="_blank" support site
+/       | for more information about this section.
+
+- content_for :alerts
+  div.collection-list-description
+    .filter-label
+
+.sidebar#resource-filter-column
+  #collection-list-filters
+
+.main
+  #list-tools
+    .pull-left
+      = button_to 'Invite user', new_user_invitation_path, {method: :get, remote: true, class: 'btn btn-primary'} if can?(:create, resource_class)
+    .text-right
+      .dropdown.btn-download
+        a.btn.dropdown-toggle href="#" data-toggle="dropdown" data-target="#" title="Download"
+          i.icon-download
+          i.icon-arrow-down-small
+        ul.dropdown-menu.download-options-menu role="menu" aria-labelledby="dLabel"
+          li
+            a.xlsx-download-link href="#" role="menuitem" data-url="#{company_users_path(format: :csv, sorting: 'first_name', sorting_dir: 'asc')}"
+              | Download as CSV
+          li
+            a#pdf-export.xlsx-download-link href="#" role="menuitem" data-url="#{company_users_path(format: :pdf)}"
+              | Download as PDF
+
+  div#users-list.resource-list
+
+= render partial: 'help_tutorial'
+
+javascript:
+  $('#collection-list-filters').filteredList({
+    'source': '#{url_for(controller: :company_users, action: :items)}',
+    'filtersUrl': '#{filter_url(controller_name)}',
+    'listContainer': '#users-list',
+    'sorting': 'first_name',
+    'sorting_dir': 'asc',
+    'includeCalendars': false,
+    'applyTo': '#{controller_name}',
+    'userFilters': #{user_saved_filters(controller_name).to_json.html_safe},
+    'includeAutoComplete': true,
+    'autoCompletePath': '#{autocomplete_path(controller_name, format: :json)}',
+    'defaultParams': '#{j default_params_for_view('status[]=Active')}',
+    'emptyFilterResultsMessage': '#{j t("blank_states.#{controller_name}.filters.line1") }',
+    'emptyFilterResultsMessageLine2': '#{j t("#{controller_name}.filters.line2", default: :filters_line2, scope: :blank_states) }'
+  });
+
+  $(document).ready(function() {
+    $('#search-box-filter').keydown(function(event){
+      if(event.keyCode == 13) {
+        event.preventDefault();
+        return false;
+      }
+    });
+  });
+
+  $(document).on('users:change', function(){
+    $('#collection-list-filters').filteredList('reloadData');
+  });

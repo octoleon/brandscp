@@ -1,0 +1,31 @@
+css:
+  .details_box h5 {
+    color: #acacac;
+    margin: 20px 0 10px;
+  }
+
+  .without-counter-title {
+    color: #c0c0c0;
+    font-size: 12px;
+    font-weight: bold;
+  }
+
+  .results-title, .group-by-container {
+    display: none !important;
+  }
+
+#analysis-campaign.details_box.content.form-results-box
+  h4= "CAMPAIGN SUMMARY"
+  .filter-description
+    = describe_filters
+  = render partial: 'form_fields_campaign', locals: {showAll: true}, formats: [:html]
+
+- content_for :pdf_scripts
+  javascript:
+    Highcharts.setOptions({
+      plotOptions: {
+          series: {
+              animation: false
+          }
+      }
+    });

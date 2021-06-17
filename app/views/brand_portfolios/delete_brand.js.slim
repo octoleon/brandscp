@@ -1,0 +1,4 @@
+|
+  $('#brands').html('#{escape_javascript(render('brands'))}');
+  $(document).trigger('brands:change');
+  $(document).trigger('brand:delete', #{@brand.id});

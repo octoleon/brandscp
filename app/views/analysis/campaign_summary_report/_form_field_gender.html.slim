@@ -1,0 +1,18 @@
+span.form-result-label= form_field.kpi.present? ? form_field.kpi.name : form_field.name
+- if result.any?
+  - totals = presenter.gender_percentage(result)
+- else
+  - totals = { male: 0, female: 0 }
+
+
+#gender-graph.chart-area.pdf-keeptogether
+  .male.pdf-keeptogether class="#{result.empty? ? 'empty' : ''}"
+    .percent
+      span = totals[:male]
+      span.percent-sign = '%'
+    .gender = 'Male'
+  .female.pdf-keeptogether class="#{result.empty? ? 'empty' : ''}"
+    .percent
+      span = totals[:female]
+      span.percent-sign = '%'
+    .gender = 'Female'

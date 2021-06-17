@@ -1,0 +1,11 @@
+|
+  bootbox.classes('modal-large modal-show-all-results');
+  var showAllDialog = bootbox.dialog($('#{escape_javascript(render partial: "show_all", locals: {result: @result, form_field_type: @form_field_type})}'), [
+    {
+      "label" : "Cancel",
+      "class" : "btn",
+      "callback": function() {
+        showAllDialog.modal('hide');
+      }
+    }
+  ], {'onEscape': true, animate: (!$.fx.off), header: '#{j @modal_dialog_title}'})

@@ -1,0 +1,24 @@
+#incomplete-tasks-module
+  ul.nav.nav-tabs
+    li.active
+      a href="#my-incomplete-tasks" data-toggle="tab" My Tasks
+    li
+      a href="#team-incomplete-tasks" data-toggle="tab" Team Tasks
+
+  #dasboard-tasks-content.details_box.tab-content
+    #my-incomplete-tasks.tab-pane.active
+      h5.module-title INCOMPLETE TASKS
+      #my-tasks-list.resource-list
+        = render my_incomplete_tasks
+      .pull-right
+        = link_to events_path, class: 'btn btn-info' do
+          = "View All"
+          i class="icon-angle-right"
+    #team-incomplete-tasks.tab-pane
+      h5.module-title INCOMPLETE TASKS
+      #team-tasks-list.resource-list
+          = render team_incomplete_tasks
+      .pull-right
+        = link_to events_path, class: 'btn btn-info' do
+          = "View All"
+          i class="icon-angle-right"

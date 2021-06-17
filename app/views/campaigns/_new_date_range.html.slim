@@ -1,0 +1,8 @@
+.resource-list.select-list
+  - @date_ranges.each do |date_range|
+    .resource-item id="date-range-#{date_range.id}"
+      .resource-item-link
+        .text-large= date_range.name
+        = date_range.description
+      .resource-item-actions
+        = link_to '', add_date_range_campaign_path(resource, date_range_id: date_range.id), id: "add-date-range-btn-#{date_range.id}", data: {'date-range-id' => date_range.id}, class: 'icon-plus-sign', remote: true, method: :post

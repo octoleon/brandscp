@@ -1,0 +1,49 @@
+= render 'basic_info'
+- presenter.current_phase_activities.each do |activity|
+  - @a = activity
+  - if activity[:id] == 'expenses' and can?(:expenses, resource)
+      #event-expenses.details_box
+        = render 'phase_activity_header', activity: activity, default_text: 'EXPENSES'
+        = render 'expenses'
+  - elsif activity[:id] == 'media' and can?(:photos, resource)
+      #event-photos.details_box.box_photos
+        = render 'phase_activity_header', activity: activity, default_text: 'MEDIA GALLERY'
+        = render partial: 'photos', locals: { allow_upload: true }
+  - elsif activity[:id] == 'contacts' and can? :view_contacts, resource
+      #event-contacts.details_box
+        = render 'phase_activity_header', activity: activity, default_text: 'CONTACTS'
+        #event-contacts-list
+          = render 'contacts'
+  - elsif activity[:id] == 'tasks' and can? :tasks, resource
+      #event-tasks.details_box
+        = render 'phase_activity_header', activity: activity, default_text: 'TASKS'
+        = render partial: 'tasks'
+  - elsif activity[:id] == 'documents' and can? :documents, resource
+      #event-documents.details_box
+        = render 'phase_activity_header', activity: activity, default_text: 'DOCUMENTS'
+        - hidden = resource.documents.active.any? || resource.campaign.documents.any?
+        = render partial: 'attached_assets/document_form', locals: { hidden: hidden, resource: AttachedAsset.new, callback_url: event_documents_path(resource, format: :js) }
+        = link_to 'Upload', '#documents_upload_form', 'data-toggle' => 'collapse', id: 'event-upload-documents', class: "btn btn-primary #{hidden ? '' : 'hide'}", title: 'Add Documents' if can? :create_document, Event
+        .documents-list
+          #documents-list.resource-list
+            = render :partial => "documents/document", :collection => resource.documents.active + resource.campaign.documents, :locals => { parent: resource }
+  - elsif activity[:id] == 'comments' and can?(:comments, resource)
+      #event-comments.details_box
+        = render 'phase_activity_header', activity: activity, default_text: 'CONSUMER COMMENTS'
+        = render 'comments'
+  - elsif activity[:id] == 'attendance' and can?(:index_invites, Event)
+      #event-attendance.details_box
+        = render 'phase_activity_header', activity: activity, default_text: 'ATTENDANCE'
+        = render 'attendance'
+  - elsif activity[:id] == 'survey' and can?(:surveys, resource)
+      #event-surveys.details_box
+        = render 'results_surveys'
+  - elsif activity[:id][0, 20] == 'custom-activity-form'
+      #event-custom-activity.details_box
+        h5.module-title
+          = activity[:title].upcase
+        - if activity[:required]
+          span.module-required-tag
+            = '(Required)'
+        = render 'custom_activity_form', activity: activity
+

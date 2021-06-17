@@ -1,0 +1,15 @@
+- presenter = present(event)
+.resource-item id="event_#{event.id}" class="#{active_class(event)} #{event.aasm_state}#{event.late? && event.unsent? ? ' late' : '' }"
+  .span3.date
+     = presenter.date_range
+  .span5
+    =link_to_if_permitted :show, event, event_url(event), title: 'Event Details', class: 'resource-item-link' do
+      .text-large.crop-text= event.campaign_name
+      = event_place_address(event, false, ', ')
+  .span3.last
+    - if can?(:view_members, event)
+      - unless event.users.empty? && event.teams.empty?
+          = presenter.team_members_avatars(event.id)
+  .resource-item-actions
+    = button_to_edit event if can?(:edit, event)
+    = button_to_activate_or_deactivate(event) if can?(:deactivate, event)

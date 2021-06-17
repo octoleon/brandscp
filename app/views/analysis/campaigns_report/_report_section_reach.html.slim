@@ -1,0 +1,26 @@
+.box_report
+  p.big 
+   b Reach
+
+  - data = campaigns_events_data
+
+  .row-fluid
+    .span8
+
+    .span6.pull-right
+      .reach-narrative
+        = reach_narrative(data)
+
+    .row-fluid
+      .span6
+        #gender-graph.row-fluid
+          = gender_graph(data['gender'])
+        .row-fluid
+          #age-graph
+      .span6.ethnicity
+        #ethnicity-graph
+
+  javascript:
+    #{render partial: 'shared/age_graph', locals: {data: data['age'], container: '#age-graph'}}
+
+    #{render partial: 'shared/ethnicity_graph', locals: {data: data['ethnicity'], container: '#ethnicity-graph'}}

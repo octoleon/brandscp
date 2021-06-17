@@ -1,0 +1,158 @@
+- content_for :alerts
+  div.collection-list-description
+    .filter-label
+.tab-content.details-bar
+  .info-bar
+    .back-arrow
+      a.close-details href="#{return_path || collection_path}" title="Close Event"
+        i.icon-angle-left
+    .details-bar-status
+      nav
+        ul.switch-list.unstyled.view-indicator
+          li
+            a href="#{return_path || collection_path}"
+              span You are viewing Campaign summary page. Click to close.
+  #list-view.tab-pane.active
+    .details_box.tool-box.first
+      h5.results-title CAMPAIGN SUMMARY
+      #list-tools
+        = simple_form_for :report, url: analysis_campaign_summary_report_path, remote: true, html: { id: 'report-analysis' } do |f|
+          = f.input :campaign_id, label: 'Campaigns', collection: campaigns_list_for_dropdown, selected: params[:campaign_id], required: true, input_html: { class: 'multiselect-enabled no-validate', multiple: true }
+          = f.input :summary_group_by, as: :hidden, wrapper: false
+
+        = link_to 'Generate', '#', id: 'btn-generate', class: 'btn btn-primary', remote: true
+
+        .export-xls.pull-right.hidden
+          .dropdown.btn-download
+            a.btn.dropdown-toggle id="btn-download" href="#" data-toggle="dropdown" data-target="#" title="Download"
+              i.icon-download
+              i.icon-arrow-down-small
+            ul#download-status-btn.dropdown-menu.download-options-menu role="menu" aria-labelledby="dLabel"
+              li
+                a#export-csv href="#" role="menuitem" data-url="#{analysis_campaign_summary_report_path(format: :csv)}"
+                  | Download as CSV
+              li
+                a#export-pdf href="#" role="menuitem" data-url="#{analysis_campaign_summary_report_export_path(format: :pdf)}"
+                  | Download as PDF
+    #report-container
+      #analysis-campaign.details_box.content
+        = render 'blank_state'
+
+javascript:
+  $('#btn-generate').on('click', function(e){
+    $('.btn-group').removeClass('open');
+    if ($('#report_campaign_id').val() != null) {
+      $('#download-status-btn').attr('disabled', false);
+      $('#analysis-campaign').empty().addClass('loading-spinner');
+      if ($('ul.multiselect-container div.checker span.checked').length < 2 && $('#report_summary_group_by').val() === 'campaign') {
+        $('#report_summary_group_by').val('status');
+      }
+      submitForm();
+    }
+    else {
+      $('#download-status-btn').attr('disabled', true);
+      $('#analysis-campaign').empty().addClass("details_box content empty-state").prepend('<p class="text-center empty-state">Select a campaign from the list above');
+    }
+  });
+
+  $('#export-pdf').on('click', function(e){
+    if ($('#report_campaign_id').val()) {
+      s = $(this).data('url') + '?campaign_summary='+$('#report_campaign_id').val() + '&' + $('#collection-list-filters').filteredList('paramsQueryString');
+      s += s[s.length - 1] == '&' ? '' : '&';
+      s += 'summary_group_by=' + $('#report_summary_group_by').val();
+      window.location.href = s
+    }
+    return false;
+  });
+
+  $(document).on('click', '#export-csv', function() {
+    url = $(this).data('url') + ($(this).data('url').indexOf('?') >= 0 ? '&' : '?') + 'campaign_summary='+$('#report_campaign_id').val() + '&' + $('#collection-list-filters').filteredList('paramsQueryString');
+    $.ajax(url, {
+      method: "GET",
+      dataType: "script"
+    });
+    return false;
+  });
+
+  $('select.multiselect-enabled').multiselect({
+    includeSelectAllOption: true,
+    selectAllText: 'Select All Campaigns',
+    enableFiltering: true,
+    enableCaseInsensitiveFiltering: true,
+    filterPlaceholder: "#{j I18n.translate('analysis.campaign_summary.filter.placeholder')}",
+    templates: {
+      filter: '<li class="multiselect-item filter"><div class="input-group"><input class="form-control multiselect-search" type="text"></div></li>',
+      filterClearBtn: "<span class='input-group-btn'><button class='multiselect-clear-filter' type='button'>#{j I18n.translate('analysis.campaign_summary.filter.reset')}</button></span>"
+    },
+
+    onChange: function(option, checked, select) {
+      $('button.multiselect').removeAttr('title');
+      var container = $('ul.multiselect-container.dropdown-menu');
+      if ($('li.multiselect-all', container) && option === undefined) {
+        var allCheckboxes = $("div.checker span", container);
+        if (checked === true) {
+          allCheckboxes.addClass('checked');
+        } else {
+          allCheckboxes.removeClass('checked');
+        }
+      }
+    },
+    buttonText: function(options, select) {
+      var limit = 1;
+      var labels = [];
+      var title = [];
+      options.each(function(i) {
+        if ($(this).attr('label') !== undefined) {
+          name = $(this).attr('label');
+        } else {
+          name = $(this).html();
+        }
+
+        if (i <= limit-1) {
+          labels.push(name);
+        } else {
+          title.push(name);
+        }
+      });
+
+      $('.more-items').remove();
+      $('button.multiselect').removeClass('multiselect-tooltip').removeAttr('title data-original-title data-placement')
+      if (options.length === 0) {
+        $('#btn-generate').attr('disabled', true).addClass('disabled');
+        $('#btn-download').attr('disabled', true).addClass('disabled');
+        $('.multiselect-selected-text').removeClass('selected');
+        return 'Select one or more campaigns';
+      } else if (options.length > limit) {
+        $('#btn-generate').attr('disabled', false).removeClass('disabled');
+        $('#btn-download').attr('disabled', false).removeClass('disabled');
+        $('.multiselect-selected-text').addClass('selected').after('<span class="more-items">+' + (options.length-limit) + ' more</span>');
+        $('button.multiselect').addClass('multiselect-tooltip').attr('data-original-title', title.join('<br />')).attr('data-placement', 'bottom');
+        $('.multiselect-tooltip').tooltip({html: true, delay: 0, animation: false});
+        return labels.join(', ') + '';
+      } else {
+        $('#btn-generate').attr('disabled', false).removeClass('disabled');
+        $('#btn-download').attr('disabled', false).removeClass('disabled');
+        $('.multiselect-selected-text').addClass('selected');
+        return labels.join(', ') + '';
+      }
+    }
+  });
+
+  submitForm = function() {
+    if ($('#report_campaign_id').val()){
+      $('form#report-analysis').submit();
+    } else {
+      $('#download-status-btn').attr('disabled', true);
+    }
+  }
+
+  function htmlEscape(s) {
+    return (s + '').replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/'/g, '&#039;')
+      .replace(/"/g, '&quot;')
+      .replace(/\n/g, '<br />');
+  }
+
+  $('.collection-list-description').hide();

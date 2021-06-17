@@ -1,0 +1,74 @@
+- remote ||= false
+- is_admin = can?(:super_update, resource)
+= simple_form_for(resource, remote: remote || false) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.simple_fields_for :user do |uf|
+      .row-fluid.users
+        .span6
+          = uf.input :first_name, input_html: {class: 'input-large'}, :autofocus => true
+        .span6
+          = uf.input :last_name, input_html: {class: 'input-large'}
+
+      - if is_admin
+        .row-fluid.users
+            = f.association :teams, collection: company_teams.active.all, input_html: {class: 'input-xxlarge chosen-enabled', "data-placeholder" => 'Select Teams'}
+      .row-fluid.users
+        - if resource.unconfirmed_email.present? && resource.unconfirmed_email != resource.email
+          .email-confirmation-message
+            p== "Check your (<b>#{resource.unconfirmed_email}</b>) to confirm your new address. Until you confirm, you will continue to use your current email address."
+            = link_to 'Resend confirmation', resend_email_confirmation_company_user_path(resource), data: { disable_with: 'Sending' }, remote: true
+            = link_to 'Cancel this change', cancel_email_change_company_user_path(resource), data: { disable_with: 'Sending' }, remote: true
+
+        = uf.input :email, input_html: {class: 'input-xxlarge'}
+      .row-fluid.users
+        = uf.input :phone_number, input_html: {class: 'input-xxlarge'}, required: !is_admin
+
+      - if is_admin && resource.id != current_company_user.id
+        .row-fluid.users-teams-roles
+          = f.input :role_id, as: :select, collection: current_company.roles.active.not_admin, input_html: {class: 'input-large chosen-enabled'}
+      - if resource.id == current_company_user.id || is_admin
+        .row-fluid.users
+            = uf.input :password, input_html: {class: 'input-xxlarge', minlength: 8, maxlength: 128}, hint: 'Password must contain at least 8 characters, at least 1 number, at least 1 lowercase character (a-z) and at least 1 uppercase character (A-Z)'
+        .row-fluid.users
+            = uf.input :password_confirmation, input_html: {class: 'input-xxlarge'}
+        .row-fluid.users
+          = uf.input :street_address, label: 'Address', input_html: {class: 'input-xxlarge'}, required: !is_admin
+        .row-fluid.users
+          = uf.input :unit_number, label: false, input_html: {class: 'input-xxlarge'}, required: false
+        .row-fluid.users
+          .span6
+            = uf.input :country, input_html: {class: 'input-large chosen-enabled'}, priority: ['US'], iso_codes: true, required: !is_admin
+          .span6
+            = uf.input :city, input_html: {class: 'input-large'}, required: !is_admin
+        .row-fluid.users
+          .span6
+            = uf.input :state, collection: (resource.country.present? ? Country.new(resource.country).states.map{|k, info| [info['name'],k]} : []), input_html: {class: 'input-large chosen-enabled'}, required: !is_admin
+          .span6
+            = uf.input :zip_code, input_html: {class: 'input-large'}, required: !is_admin
+        .row-fluid.users-teams-roles
+          = uf.input :time_zone, input_html: {class: 'input-large chosen-enabled'}, required: !is_admin
+
+  .form-actions
+    = f.button :submit, 'Save', class: 'btn btn-primary', data: {disable_with: 'Please wait...'}
+    = "&nbsp;".html_safe
+    = f.button :button, 'Cancel', class: 'btn btn-cancel'
+
+- unless resource.time_zone.present?
+  javascript:
+    $('#company_user_user_attributes_time_zone').set_timezone({'mappings':#{ActiveSupport::TimeZone::MAPPING.invert.to_json.html_safe}});
+
+coffee:
+  $('#company_user_user_attributes_country').change () ->
+    $.get '/countries/states.json', {country: $(this).val()}, (response) ->
+      states = $('#company_user_user_attributes_state')
+      val = states.val()
+      states.html('<option></option>')
+      if response.states
+        for state in response.states
+          option = $('<option>').val(state.id).html(state.name)
+          if val is state.id
+            option.attr('selected', 'selected')
+          states.append(option)
+      states.trigger('liszt:updated')

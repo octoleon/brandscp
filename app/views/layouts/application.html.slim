@@ -1,0 +1,100 @@
+- is_test = Rails.env.test?
+doctype html
+/[if lt IE 7]
+  | <html class="msie ie6">
+/[if IE 7]
+  | <html class="msie ie7">
+/[if IE 8]
+  | <html class="msie ie8">
+/[if IE 9]
+  | <html class="msie ie9">
+| <!--[if (gte IE 9)|!(IE)]<!--> <html> <!--<![endif]-->
+head
+  meta name="viewport" content="width=device-width, initial-scale=1.0"
+  meta charset="utf-8"
+  title= content_for?(:title) ? yield(:title) : "App"
+  meta content=(content_for?(:description) ? yield(:description) :"App") name="description"
+    = stylesheet_link_tag "http://fonts.googleapis.com/css?family=Lato:100,300,400,700" unless is_test
+    = stylesheet_link_tag "plugins", :media => "all"
+    = stylesheet_link_tag "application", :media => "all"
+    = stylesheet_link_tag "https://d218iqt4mo6adh.cloudfront.net/assets/widget_embed_191.css" unless is_test
+    = javascript_include_tag "application"
+    - if is_test
+      javascript:
+        $.fx.off = true;
+        $.support.transition=false;
+        !function ($) {
+          $(function () {
+            $.fx.off = true;
+            $.support.transition=false;
+          })
+        }(window.jQuery);
+    = yield(:head)
+    = javascript_include_tag "http://maps.googleapis.com/maps/api/js?key=#{GOOGLE_API_KEY}&libraries=places,geometry"
+    = csrf_meta_tags
+    - if !is_test && user_signed_in? && behave_as_user.nil?
+      javascript:
+        if (#{!is_test}){
+          $(document).ready(function(){
+            checkUserTimeZoneChanges('#{escape_javascript(current_user.time_zone.try(:html_safe))}', '#{escape_javascript(current_user.detected_time_zone.try(:html_safe))}');
+          })
+        }
+    = render 'layouts/icons'
+
+  - unless Rails.env.development? || is_test
+    = render 'application/tracking/lucky_orange'
+    javascript:
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-49170307-1', 'auto');
+      ga('send', 'pageview');
+
+
+body id="application-body" class="app-layout #{controller_name} #{action_name} #{custom_body_class} #{user_signed_in? ? 'with-fixed-top' : ''}"
+
+  header class="navbar navbar-inverse navbar-fixed-top"
+    = render 'layouts/messages'
+    - if current_real_company_user.is_admin?
+      .top-admin-login-navigation
+        .container
+          = render 'layouts/current_user_admin'
+    .navbar-inner
+      .container
+        .pull-left
+          h1#company-name
+            .header-menu
+              = user_company_dropdown(current_user)
+        .pull-right
+          #mobile-main-nav-bar-btn.btn.btn-navbar data-toggle="collapse" data-target=".main-nav-collapse"
+            span class="icon-bar"
+            span class="icon-bar"
+            span class="icon-bar"
+        #top-admin-home-navigation.pull-right
+          = render_navigation context: :top, expand_all: true, nav_class: 'nav-pills'
+
+      .nav-collapse.collapse.main-nav-collapse
+        = render_navigation renderer: :bootstrap, nav_class: 'nav-pills'
+
+  #main-left-nav.nav-collapse.collapse
+    .menu
+      = render_navigation renderer: :bootstrap, level: 1, nav_class: 'nav-stacked'
+  = yield :alerts
+  #main-container.container
+    #application-content class="#{content_for?(:details_bar) ? 'with_details_bar' : ''}"
+      .row-fluid
+        .span12
+          = yield
+
+  span class="totop pull-right"
+    a href="#" Top
+  footer
+    = render 'shared/satisfaction_survey'
+    a target="_blank" class="pull-right" href="http://www.app.com" Powered by App
+  = render 'application/help'
+
+  = yield(:footer)
+
+</html>

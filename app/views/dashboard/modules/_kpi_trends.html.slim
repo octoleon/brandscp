@@ -1,0 +1,27 @@
+- can_view_status = can?(:event_status, Campaign)
+#kpis-trends-module.details_box
+  #kpis-trends-bars
+    h5.module-title EVENT STATUS
+    p = I18n.translate(:'dashboard.intro_message')
+    .map_header
+      .color_map
+        .executed
+          span.bullet.executed
+          = 'EXECUTED'
+        .scheduled
+          span.bullet.scheduled
+          = 'SCHEDULED'
+        .today
+          span.indicator.today
+          = 'TODAY'
+    .container-kpi-trend
+      - if dashboard_promo_hours_graph_data.any?
+        - dashboard_promo_hours_graph_data.each do |campaign|
+          .kpi-trend
+            .name= campaign['name']
+            - if can_view_status
+              = link_to "View details", analysis_event_status_path(campaign_id: campaign['id'])
+            = campaign_promo_hours_chart(campaign)
+      - else
+        .kpi-trend
+          p No Active Events

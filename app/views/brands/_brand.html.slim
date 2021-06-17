@@ -1,0 +1,6 @@
+div.resource-item id="brand_#{brand.id}" class="#{active_class(brand)}"
+  = link_to_if_permitted :show, Brand, brand_path(brand), class: 'resource-item-link' do
+    .text-large= brand.name
+  div.resource-item-actions
+    = button_to_edit brand if can?(:edit, Brand)
+    = button_to_activate_or_deactivate(brand) if can?(:deactivate, Brand)

@@ -1,0 +1,86 @@
+- remote ||= false
+= simple_nested_form_for([@campaign, resource], remote: remote || false) do |f|
+
+  .form-inputs
+    - if resource.out_of_the_box?
+      = render partial: 'out_box', locals: { f: f }
+    - else
+      = render partial: 'custom', locals: { f: f }
+
+  .form-actions
+    = f.button :submit, class: 'btn-primary', data: {disable_with: 'Please wait...'}
+    = "&nbsp;".html_safe
+    = f.button :button, 'Cancel', id: 'btn-cancel-kpi', class: 'btn-cancel'
+
+javascript:
+    var captureOptions = #{Kpi::CUSTOM_TYPE_OPTIONS.to_json.html_safe}
+
+    if (!#{resource.out_of_the_box?.to_s}) {
+      $(document).ready(function() {
+        kpiType = $('#kpi_kpi_type').val();
+        toggleSegmentsGoals(kpiType);
+      });
+    }
+
+    $('#kpi_kpi_type').change(function() {
+      capture = $('#kpi_capture_mechanism');
+      capture.empty();
+      selectedOption = this.value;
+      if (selectedOption) {
+        options = captureOptions[selectedOption];
+        for(var i = 0; i < options.length; i++) {
+          capture.append($("<option/>", {
+              value: options[i],
+              text: capitalize(options[i])
+          }));
+        }
+        capture.trigger('liszt:updated')
+
+        toggleSegmentsGoals(selectedOption);
+      }
+    });
+
+    $('#kpi_name').focusout(function() {
+      $('#similar-kpi-message').hide();
+      if (name = $(this).val()) {
+        $.get('#{find_similar_kpi_campaigns_path}', {name: name}, function(data) {
+          if (!jQuery.isEmptyObject(data)) {
+            $('#similar-kpi-message').text('There may be a duplicated called ' + data[0].name);
+            $('#similar-kpi-message').show();
+          }
+        });
+      }
+    });
+
+    function toggleSegmentsGoals(option) {
+      if (option) {
+        switch (option) {
+          case 'number':
+          case 'events_count':
+          case 'photos':
+          case 'promo_hours':
+          case 'videos':
+            $('#kpisegment-fields').hide();
+            $('#kpigoal-fields').show();
+            break;
+          case 'count':
+          case 'percentage':
+            $('#kpigoal-fields').hide();
+            $('#kpisegment-fields').show();
+            break;
+        }
+      }
+    }
+
+    function capitalize(text) {
+      return text.substr(0,1).toUpperCase() + text.substr(1);
+    }
+
+    $('#btn-cancel-kpi').click(function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      $(this).parents('.modal').modal('hide');
+      if ('#{resource.new_record?}' == 'true') {
+        selectKpisDialog.modal('show');
+      }
+    });

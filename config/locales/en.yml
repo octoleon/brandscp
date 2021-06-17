@@ -1,0 +1,1547 @@
+
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+en:
+  other_areas:
+    one: 'and one more areas'
+    one: 'and %{count} other areas'
+  activerecord:
+    models:
+      company_user: "User"
+      document_folder: "Folder"
+      kpi: "KPI"
+      activity_type: "Activity Type"
+      invite: "Invitation"
+      event: "Event"
+      event_data: "Event Data"
+      task: "Task"
+      campaign: "Campaign"
+    attributes:
+      activity:
+        start_date_date: "Start date"
+        start_date_time: "Start time"
+        end_date_date: "End date"
+        end_date_time: "End time"
+      kpis_segment:
+        text: 'Name'
+      event_expense:
+        expense_date: 'Date'
+      contact:
+        company_name: 'Company'
+      invite:
+        invitees: 'Invites'
+        rsvps_count: 'RSVPs'
+        attendees: 'Attendees'
+      invite_individual:
+        rsvpd: "RSVP'd"
+        first_name: 'First Name'
+        last_name: 'Last Name'
+        rsvpd: "RSVP'd?"
+        attended: "Attended?"
+        attended_previous_bartender_ball: "Attended previous bartender ball?"
+        mobile_phone: "Mobile phone"
+        mobile_signup: "Mobile signup"
+        opt_in_to_future_communication: "Opt in to future communication?"
+        primary_registrant_id: "Primary registrant ID"
+        bartender_how_long: "Bartender how long?"
+        bartender_role: "Bartender role"
+        date_of_birth: "Date of Birth"
+  time:
+    formats:
+      default: '%m/%d/%Y %H:%M:%S'
+      db: '%m/%d/%Y %H:%M:%S'
+
+  helpers:
+    submit:
+      create: "Create"
+      update: "Save"
+      invite:
+        create: "Send Invitations"
+        update: "Save"
+      invite_individual:
+        create: "Send Invitation"
+        update: "Save"
+
+
+  flash_email_confirmation: 'A confirmation email was sent to %{email}. Your email will not be changed until you complete this step.'
+
+  recurrence:
+    daily:
+      one: 'day'
+      other: '%{count} days'
+    weekly:
+      one: 'week'
+      other: '%{count} weeks'
+    monthly:
+      one: 'month'
+      other: '%{count} months'
+    yearly:
+      one: 'year'
+      other: '%{count} years'
+
+  filters:
+    areas: 'Areas'
+    status: 'Active State'
+    activity_types: 'Activity Types'
+    brands: 'Brands'
+    brand_portfolios: 'Brand Portfolios'
+    campaigns: 'Campaigns'
+    company_users: 'Users'
+    date_ranges: 'Date Ranges'
+    day_parts: 'Day Parts'
+    event_status: 'Event Status'
+    people: 'People'
+    media_type: 'Media Types'
+    asset_type: 'Media Types'
+    staff: 'Staff'
+    places: 'Places'
+    roles: 'Roles'
+    tags: 'Tags'
+    tasks: 'Tasks'
+    teams: 'Teams'
+    task_status: 'Task Status'
+    user_active_state: 'Active State'
+    users: 'Users'
+    price: 'Price'
+    rating: 'Star Rating'
+    venues: 'Venues'
+    sources: 'Sources'
+    questions: 'Questions'
+
+  new_features:
+    event_details_scheduled:
+      title: 'Getting Started: Event Details'
+      video: '//www.youtube.com/embed/w-ykYYARlBY?rel=0'
+      description: '<p>The Event Details page manages the entire event lifecycle from event planning to filling out post event recaps and reviewing post event results.</p><p>There are three event phases in App, Plan, Execute and Results. Each phase guides you towards the next step to event completion. Click on the video to the left for a quick overview or visit our support site for more information about this section. Click on the video to the left for a quick overview or visit our <a href="http://support.App.com" target="_blank">support site</a> for more information about this section.<p>'
+
+    results_activity_data:
+      title: 'Getting Started: Activity Data Report'
+      video: '//www.youtube.com/embed/0dsRGoq2XqQ?rel=0'
+      description: '<p>The Activity Data report holds all collected activity data for easy review and exporting. Click on the video to the left for a quick overview or visit our <a href="http://support.App.com" target="_blank">support site</a> for more information about this section.<p>'
+
+  blank_states:
+    filters_line1: 'There are no results matching the filtering criteria you selected.'
+    filters_line2: 'Please select different filtering criteria.'
+    events:
+      empty:
+        line1: 'You do not have any events right now.'
+        line2:
+          without_schedule_permissions: 'No problem, as soon as events are added they will display in this section.'
+          with_schedule_permissions: 'Click the New Event button to schedule a new event.'
+      filters:
+        line1: 'There are no events matching the filtering criteria you selected.'
+    results_photos:
+      empty:
+        line1: 'There are currently no photos for you to view. '
+        line2: 'Once Photos have been uploaded they will be displayed in this report. '
+      filters:
+        line1: 'There are no Photos matching the filtering criteria you selected.'
+    results_activities:
+      empty:
+        line1: 'You do not have any activity data at this time.'
+        line2: 'Once Activities have been captured they will be displayed in this report. '
+      filters:
+        line1: 'There are no activities matching the filtering criteria you selected.'
+    results_event_data:
+      empty:
+        line1: 'You do not have any post event data to view at this time.'
+        line2: 'You will see data here once post event reports have been submitted for your events'
+      filters:
+        line1: 'There are is no post event data matching the filtering criteria you selected.'
+    results_expenses:
+      empty:
+        line1: 'There are currently no expenses to view for your campaigns.'
+        line2: "Use this report to track event expenses. You can view them here as soon as they've been added."
+      filters:
+        line1: 'There are no Expenses matching the filtering criteria you selected.'
+    results_comments:
+      empty:
+        line1: 'There are currently no comments to view for your campaigns.'
+        line2: 'Check back later once comments have been captured.'
+      filters:
+        line1: 'There are no Comments matching the filtering criteria you selected.'
+    results_surveys:
+      empty:
+        line1: 'There are currently no Surveys for you to view.'
+        line2: 'Check back later once surveys have been captured.'
+      filters:
+        line1: 'There are no Surveys matching the filtering criteria you selected.'
+    results_gva:
+      empty:
+        line1: 'Choose a campaign to run the goals vs. actual report.'
+        line2: 'Use this report to track progress against campaign, place, and staff goals.'
+      filters:
+        line1: No Campaign goals have been set for this Campaign.
+        line2: Please select different filtering criteria.
+        line3: No Place goals have been set for this Campaign.
+        line4: No Staff goals have been set for this Campaign.
+    results_event_status:
+      empty:
+        line1: 'Choose a campaign to run the Event Status report.'
+        line2: 'Use this report to track progress against your event and promo hour goals.'
+      filters:
+        line1: No Campaign event or promo hour goals have been set for this Campaign.
+        line2: Please select different filtering criteria.
+        line3: No Place event or promo hour goals have been set for this Campaign.
+        line4: No Staff event or promo hour goals have been set for this Campaign.
+    visits:
+      empty:
+        line1: 'You do not have any visits right now.'
+        line2:
+          without_schedule_permissions: 'No problem, as soon as visits are added they will display in this section.'
+          with_schedule_permissions: 'Click the New Visit button to create a new visit.'
+      filters:
+        line1: 'There are no visits matching the filtering criteria you selected.'
+    user_tasks:
+      empty:
+        line1: 'There are not any tasks assigned to you.'
+        line2:
+          without_create_permissions: "No worries, once you've been assigned tasks, they will show up right here."
+          with_create_permissions: 'Want to add a new task? Click Add Tasks to assign a new task to yourself or teammates.'
+      filters:
+        line1: 'There are no tasks matching the filtering criteria you selected.'
+    teams_tasks:
+      empty:
+        line1: 'There are not any tasks assigned to your team right now.'
+        line2:
+          without_create_permissions: "No worries, once you've been assigned tasks, they will show up right here."
+          with_create_permissions: 'Want to add a new task? Click Add Tasks to assign a new task to yourself or teammates.'
+      filters:
+        line1: 'There are no tasks matching the filtering criteria you selected.'
+    venues:
+      empty:
+        line1: 'You do not have any venues right now.'
+        line2:
+          without_schedule_permissions: 'No problem, as soon as events are added they will display in this section.'
+          with_schedule_permissions: 'Click the New Venue button to create a new venue.'
+      filters:
+        line1: 'There are no venues matching the filtering criteria you selected.'
+        line2: 'Please select different filtering criteria.'
+    campaigns:
+      filters:
+        line1: 'There are no Campaigns matching the filtering criteria you selected.'
+      empty:
+        line1: 'You do not have any campaigns right now.'
+        line2:
+          without_schedule_permissions: 'No problem, as soon as campaigns are added they will display in this section.'
+          with_schedule_permissions: 'Click the New Campaign button to create a new campaign.'
+    company_users:
+      filters:
+        line1: 'There are no Users matching the filtering criteria you selected.'
+    activity_types:
+      filters:
+        line1: 'There are no Activity Types matching the filtering criteria you selected.'
+      empty:
+        line1: 'You do not have any activity types right now.'
+        line2:
+          without_schedule_permissions: 'No problem, as soon as activity types are added they will display in this section.'
+          with_schedule_permissions: 'Click the New Activity Type button to create a new activity type.'
+    areas:
+      filters:
+        line1: 'There are no Areas matching the filtering criteria you selected.'
+      empty:
+        line1: 'You do not have any areas right now.'
+        line2:
+          without_schedule_permissions: 'No problem, as soon as areas are added they will display in this section.'
+          with_schedule_permissions: 'Click the New Area button to create a new area.'
+    teams:
+      filters:
+        line1: 'There are no Teams matching the filtering criteria you selected.'
+      empty:
+        line1: 'You do not have any teams right now.'
+        line2:
+          without_schedule_permissions: 'No problem, as soon as teams are added they will display in this section.'
+          with_schedule_permissions: 'Click the New Team button to create a new team.'
+    roles:
+      filters:
+        line1: 'There are no Roles matching the filtering criteria you selected.'
+    brands:
+      filters:
+        line1: 'There are no Brands matching the filtering criteria you selected.'
+      empty:
+        line1: 'You do not have any brands right now.'
+        line2:
+          without_schedule_permissions: 'No problem, as soon as brands are added they will display in this section.'
+          with_schedule_permissions: 'Click the New Brand button to create a new brand.'
+    brand_portfolios:
+      filters:
+        line1: 'There are no Brand Portfolios matching the filtering criteria you selected.'
+      empty:
+        line1: 'You do not have any brand portfolios right now.'
+        line2:
+          without_schedule_permissions: 'No problem, as soon as brand portfolios are added they will display in this section.'
+          with_schedule_permissions: 'Click the New Brand Portfolio button to create a new brand portfolio.'
+    date_ranges:
+      filters:
+        line1: 'There are no Date Ranges matching the filtering criteria you selected.'
+      empty:
+        line1: 'You do not have any date ranges right now.'
+        line2:
+          without_schedule_permissions: 'No problem, as soon as date ranges are added they will display in this section.'
+          with_schedule_permissions: 'Click the New Date Range button to create a new date range.'
+    day_parts:
+      filters:
+        line1: 'There are no Day Parts matching the filtering criteria you selected.'
+      empty:
+        line1: 'You do not have any date parts right now.'
+        line2:
+          without_schedule_permissions: 'No problem, as soon as date parts are added they will display in this section.'
+          with_schedule_permissions: 'Click the New Date Part button to create a new date part.'
+    invite_events:
+      filters:
+        line1: 'No events have been scheduled for this visit.'
+        line2: ''
+      empty:
+        line1: 'No events have been scheduled for this visit.'
+        line2: ''
+    campaign_summary:
+        empty:
+          line1: 'Choose campaigns to run the Campaign Summary report'
+          line2: 'Use this report to track progress against campaigns'
+        empty_field:
+          default: 'No data collected'
+
+    modules:
+      event:
+        contacts: 'No Contacts have been added to this event.'
+        team_members: 'No Team Members have been added to this event.'
+        activities: 'No Activities have been added to this event.'
+        invites:
+          any: 'No Invites have been added to this event.'
+          individual: 'No Individual Invites have been added to this event.'
+          venue: 'No Venue Invites have been added to this event.'
+        comments: 'No Consumer Comments have been added to this event.'
+        expenses: 'No Expenses have been added to this event.'
+        tasks: 'No Tasks have been added to this event.'
+        documents: 'DRAG & DROP'
+      venue:
+        activities: 'No Activities have been added to this venue.'
+        events: 'No Events have been added to this venue.'
+        invites:
+          any: 'No Invites have been added to this venue.'
+          individual: 'No Individual Invites have been added to this venue.'
+          venue: 'No Venue Invites have been added to this venue.'
+      company_users:
+        places: 'No Places have been assigned to this user.'
+      areas:
+        places: 'There are no Places added to this Area.'
+        campaigns: 'There are no Campaigns assigned to this Area.'
+      brand_portfolio:
+        brands: 'There are no Brands added to this Brand Portfolio.'
+      date_range:
+        dates: 'There are no Dates added to this Date Range.'
+      day_part:
+        times: 'There are no Time Ranges added to this Day Part.'
+      visit:
+        events: 'No events have been scheduled for this visit. '
+      campaign:
+        places: 'No Places have been added to this Campaign.'
+        staff: 'No Staff have been added to this Campaign.'
+        date_ranges: 'No Date Ranges have been added to this Campaign.'
+        day_parts: 'No Day Parts have been added to this Campaign'
+        documents: 'No Documents have been uploaded to this Campaign.'
+      team:
+        members: 'No users have been added to this Team.'
+
+  drag_n_drop:
+    items:
+      documents: 'files'
+      photos: 'images and videos'
+
+  exports:
+    pdf:
+      title:
+        events: 'Events'
+        visits: 'Brand Ambassadors Visits'
+        gva: 'Goals vs. Actual'
+        venues: 'Venues'
+        tasks: 'Tasks'
+        day_parts: 'Day Parts'
+        date_ranges: 'Date Ranges'
+        brand_portfolios: 'Brand Portfolios'
+        areas: 'Areas'
+        activity_types: 'Activity Types'
+        brands: 'Brands'
+        campaigns: 'Campaigns'
+        roles: 'Roles'
+        teams: 'Teams'
+        company_users: 'Users'
+        invites: 'Invitations'
+
+  range_filters:
+    events_count: 'Events'
+    impressions: 'Impressions'
+    interactions: 'Interactions'
+    sampled: 'Sampled'
+    venue_score: 'Venue score'
+    spent: '$ Spent'
+    promo_hours: 'Promo hours'
+
+  buttons:
+    new:
+      event: "New Event"
+      event_expense: "Add Expense"
+      team: "New Team"
+      campaign: "New Campaign"
+      brand: "New Brand"
+      role: "New Role"
+      area: "New Area"
+      brand_portfolio: "New Brand Portfolio"
+      date_range: "New Date Range"
+      day_part: "New Day Part"
+      activity_type: "New Activity Type"
+      brand_ambassadors/visit: "New Visit"
+      invite: "Add Invite"
+    edit:
+      event: "Edit Event"
+      event_expense: "Edit Expense"
+      company_user: "Edit Profile Data"
+      team: "Edit Team"
+      campaign: "Edit Campaign"
+      role: "Edit Role"
+      area: "Edit Area"
+      brand: "Edit Brand"
+      brand_portfolio: "Edit Brand Portfolio"
+      date_range: "Edit Date Range"
+      day_part: "Edit Day Part"
+      activity: "Edit Activity"
+      activity_type: "Edit Activity Type"
+      report: "Edit Report"
+      brand_ambassadors/visit: "Edit Visit"
+      invite: "Edit Invite"
+      invite_individual: "Edit Invite"
+      data_extract/activity: "Edit Report"
+      data_extract/activity_type: "Edit Report"
+      data_extract/area: "Edit Report"
+      data_extract/attendance: "Edit Report"
+      data_extract/brand_portfolio: "Edit Report"
+      data_extract/brand: "Edit Report"
+      data_extract/brand_ambassadors_visit: "Edit Report"
+      data_extract/campaign: "Edit Report"
+      data_extract/comment: "Edit Report"
+      data_extract/contact: "Edit Report"
+      data_extract/date_range: "Edit Report"
+      data_extract/day_part: "Edit Report"
+      data_extract/event: "Edit Report"
+      data_extract/event_expense: "Edit Report"
+      data_extract/event_data: "Edit Report"
+      data_extract/role: "Edit Report"
+      data_extract/task: "Edit Report"
+      data_extract/team: "Edit Report"
+      data_extract/company_user: "Edit Report"
+      data_extract/venue: "Edit Report"
+      data_extract/invite: "Edit Report"
+      data_extract/invite_individual: "Edit Report"
+      place: "Edit Venue"
+      venue: "Edit Venue"
+    deactivate:
+      event: "Deactivate Event"
+      event_expense: "Deactivate Expense"
+      company_user: "Deactivate User"
+      team: "Deactivate Team"
+      campaign: "Deactivate Campaign"
+      role: "Deactivate Role"
+      area: "Deactivate Area"
+      brand: "Deactivate Brand"
+      brand_portfolio: "Deactivate Brand Portfolio"
+      date_range: "Deactivate Date Range"
+      day_part: "Deactivate Day Part"
+      activity: "Deactivate Activity"
+      activity_type: "Deactivate Activity Type"
+      report: "Deactivate Report"
+      brand_ambassadors/visit: "Deactivate Visit"
+      invite: "Deactivate Invitation Record"
+      invite_individual: "Deactivate Invitation Record"
+      data_extract/activity: "Deactivate Report"
+      data_extract/activity_type: "Deactivate Report"
+      data_extract/area: "Deactivate Report"
+      data_extract/attendance: "Deactivate Report"
+      data_extract/brand_portfolio: "Deactivate Report"
+      data_extract/brand: "Deactivate Report"
+      data_extract/brand_ambassadors_visit: "Deactivate Report"
+      data_extract/campaign: "Deactivate Report"
+      data_extract/comment: "Deactivate Report"
+      data_extract/contact: "Deactivate Report"
+      data_extract/date_range: "Deactivate Report"
+      data_extract/day_part: "Deactivate Report"
+      data_extract/event: "Deactivate Report"
+      data_extract/event_expense: "Deactivate Report"
+      data_extract/event_data: "Deactivate Report"
+      data_extract/role: "Deactivate Report"
+      data_extract/task: "Deactivate Report"
+      data_extract/team: "Deactivate Report"
+      data_extract/company_user: "Deactivate Report"
+      data_extract/venue: "Deactivate Report"
+      data_extract/invite: "Deactivate Report"
+      data_extract/invite_individual: "Deactivate Report"
+    activate:
+      event: "Activate Event"
+      company_user: "Activate User"
+      team: "Activate Team"
+      campaign: "Activate Campaign"
+      role: "Activate Role"
+      area: "Activate Area"
+      brand: "Activate Brand"
+      brand_portfolio: "Activate Brand Portfolio"
+      date_range: "Activate Date Range"
+      day_part: "Activate Day Part"
+      activity_type: "Activate Activity Type"
+      report: "Activate Report"
+      brand_ambassadors/visit: "Activate Visit"
+      invite: "Activate Invitations Record"
+      data_extract/invite: "Activate Report"
+      data_extract/invite_individual: "Activate Report"
+    invitations:
+      resend: "Resend Invitation"
+
+  inputs:
+    attached_asset:
+      select_file:
+        photo: 'your image or %{browse}'
+        attachment: 'your file or %{browse}'
+        expense: 'the photographed<br /> receipt or %{browse}'
+
+  notifications:
+    task_late_user:
+      one: "You have one late task"
+      other: "You have %{count} late tasks"
+    task_late_team:
+      one: "Your team has one late task"
+      other: "Your team has %{count} late tasks"
+    event_recaps_due:
+      one: "There is one event recap that is due"
+      other: "There are %{count} event recaps that are due"
+    event_recaps_late:
+      one: "There is one late event recap"
+      other: "There are %{count} late event recaps"
+    rejected_recaps:
+      one: "There is one event recap that has been rejected"
+      other: "There are %{count} event recaps that have been rejected"
+    recaps_prending_approval:
+      one: "There is one event recap that is pending approval"
+      other: "There are %{count} event recaps that are pending approval"
+    new_events:
+      one: "You have a new event"
+      other: "You have %{count} new events"
+    new_team_events:
+      one: "Your team %{teams_names} has %{events_sentence}"
+      other: "You teams %{teams_names} have %{events_sentence}"
+    new_tasks:
+      one: "You have a new task"
+      other: "You have %{count} new tasks"
+    new_team_tasks:
+      one: "You have a new task"
+      other: "You have %{count} new tasks"
+    unread_tasks_comments_user: "Your task <span>%{task}</span> has a new comment"
+    unread_tasks_comments_team: "Your team's task <span>%{task}</span> has a new comment"
+    new_campaigns:
+      one: "You have a new campaign"
+      other: "You have %{count} new campaigns"
+    new_event: "You have a new event"
+    new_task: "You have been assigned a task: %{task}"
+    new_team_task: "A new task was created for your event: %{task}"
+
+  notifications_sms:
+    event_recap_late:
+      one: 'You have one late event recap'
+      other: 'You have %{count} late event recaps'
+    event_recap_due:
+      one: 'You have one due event recap'
+      other: 'You have %{count} due event recaps'
+    event_recap_late_and_due: 'You have %{due_count} due and %{late_count} late event recaps'
+    event_recap_pending_approval: 'You have an event recap that is pending approval %{url}'
+    event_recap_rejected: 'You have a rejected event recap %{url}'
+    new_event: 'You have a new event %{url}'
+    new_event_team: 'Your team has a new event'
+    late_task: 'You have a late task'
+    late_team_task: 'You have a late team task'
+    new_comment: 'You have a new comment %{url}'
+    new_team_comment: 'You have a new team comment %{url}'
+    new_unassigned_team_task: 'Your team has a new unassigned task %{url}'
+    new_task_assignment: 'You have a new task %{url}'
+    new_campaign: 'You have a new campaign %{url}'
+
+  notifications_email:
+    event_recap_due: 'You have a due event recap'
+    event_recap_late: 'You have a late event recap'
+    event_recap_pending_approval: 'You have an event recap that is pending approval %{url}'
+    event_recap_rejected: 'You have a rejected event recap %{url}'
+    new_event: 'You have been added to a new event:<br /><br /> %{campaign_name}<br /> %{date}<br /> %{address}<br /> %{url}'
+    new_event_team: 'Your team has a new event'
+    late_task: 'You have a late task'
+    late_team_task: 'You have a late team task'
+    new_comment: 'You have a new comment %{url}'
+    new_team_comment: 'You have a new team comment %{url}'
+    new_unassigned_team_task: 'Your team has a new unassigned task %{url}'
+    new_task_assignment: 'You have a new task %{url}'
+    new_campaign: 'You have a new campaign %{url}'
+
+  notification_types:
+    event_recap_due: 'Event Recaps Due'
+    event_recap_late: 'Late Event Recaps'
+    event_recap_pending_approval: 'Event Recaps Pending Approval'
+    event_recap_rejected: 'Rejected Event Recaps'
+    new_event: 'Added to Event'
+    new_event_team: 'Added to Event Team'
+    late_task: 'Late Tasks'
+    late_team_task: 'Late Team Tasks'
+    new_comment: 'New Comment'
+    new_team_comment: 'New Team Comment'
+    new_unassigned_team_task: 'New Unassigned Team Task'
+    new_task_assignment: 'New Task Assignment'
+    new_campaign: 'New Campaign'
+
+  modals:
+    title:
+      new:
+        user: "Invite User"
+        event: "New Event"
+        task: "New Task"
+        attached_asset: "Upload files"
+        survey: "New Survey"
+        team: "New Team"
+        campaign: "New Campaign"
+        role: "New Role"
+        area: "New Area"
+        brand: "New Brand"
+        brand_portfolio: "New Brand Portfolio"
+        date_range: "New Date Range"
+        day_part: "New Day Part"
+        event_expense: "New Expense"
+        kpi: "New KPI"
+        place: "New Place"
+        placeable: "Add Place"
+        date_item: "New Date"
+        comment: "New Comment"
+        goal: "New Goal"
+        day_item: "New Time"
+        contact_event: "New Contact"
+        report: "New Report"
+        activity: "New Activity"
+        activity_type: "New Activity Type"
+        custom_filter: "Save filter"
+        brand_ambassadors/visit: "New Visit"
+        brand_ambassadors/document: "New Document"
+        document_folder: "New Folder"
+        filter_setting: "Filtering options"
+        invite: "New Invitation"
+        invite_individual: "New Invitation"
+        custom_filters_category: "New Custom Filters Category"
+        data_extract/activity: "Save Report"
+        data_extract/activity_type: "Save Report"
+        data_extract/area: "Save Report"
+        data_extract/attendance: "Save Report"
+        data_extract/brand_portfolio: "Save Report"
+        data_extract/brand: "Save Report"
+        data_extract/brand_ambassadors_visit: "Save Report"
+        data_extract/campaign: "Save Report"
+        data_extract/comment: "Save Report"
+        data_extract/contact: "Save Report"
+        data_extract/date_range: "Save Report"
+        data_extract/day_part: "Save Report"
+        data_extract/event: "Save Report"
+        data_extract/event_expense: "Save Report"
+        data_extract/event_data: "Save Report"
+        data_extract/role: "Save Report"
+        data_extract/task: "Save Report"
+        data_extract/team: "Save Report"
+        data_extract/company_user: "Save Report"
+        data_extract/venue: "Save Report"
+        data_extract/invite: "Save Report"
+        data_extract/invite_individual: "Save Report"
+      edit:
+        company_user: "Edit User"
+        event: "Edit Event"
+        task: "Edit Task"
+        attached_asset: "Upload Files"
+        survey: "Edit Survey"
+        team: "Edit Team"
+        campaign: "Edit Campaign"
+        role: "Edit Role"
+        area: "Edit Area"
+        brand: "Edit Brand"
+        brand_portfolio: "Edit Brand Portfolio"
+        date_range: "Edit Date Range"
+        day_part: "Edit Day Rart"
+        event_expense: "Edit Expense"
+        kpi: "Edit KPI"
+        place: "Edit Place"
+        placeable: "Edit Places"
+        date_item: "Edit Date"
+        comment: "Edit Comment"
+        goal: "Edit Goal"
+        day_item: "Edit Time"
+        contact_event: "Edit Contact"
+        report: "Edit Report"
+        activity: "Edit Activity"
+        activity_type: "Edit Activity Type"
+        areas_campaign: "Customize %{name} Area"
+        brand_ambassadors/visit: "Edit Visit"
+        brand_ambassadors/document: "Edit Document"
+        document_folder: "Edit Folder"
+        filter_setting: "Filtering options"
+        invite: "Edit Invitation"
+        invite_individual: "Edit Invitation"
+        data_extract/activity: "Edit Report"
+        data_extract/activity_type: "Edit Report"
+        data_extract/area: "Edit Report"
+        data_extract/attendance: "Edit Report"
+        data_extract/brand_portfolio: "Edit Report"
+        data_extract/brand: "Edit Report"
+        data_extract/brand_ambassadors_visit: "Edit Report"
+        data_extract/campaign: "Edit Report"
+        data_extract/comment: "Edit Report"
+        data_extract/contact: "Edit Report"
+        data_extract/date_range: "Edit Report"
+        data_extract/day_part: "Edit Report"
+        data_extract/event: "Edit Report"
+        data_extract/event_expense: "Edit Report"
+        data_extract/event_data: "Edit Report"
+        data_extract/role: "Edit Report"
+        data_extract/task: "Edit Report"
+        data_extract/team: "Edit Report"
+        data_extract/company_user: "Edit Report"
+        data_extract/venue: "Edit Report"
+        data_extract/invite: "Edit Report"
+        data_extract/invite_individual: "Edit Report"
+
+  form_builder:
+    modules:
+      custom: "Custom"
+      consumer_reach: "Consumer Reach"
+      demographics: "Demographics"
+      expenses: "Expenses"
+      surveys: "Surveys"
+      competitive_analysis: "Competitive Analysis"
+      photos: "Photos"
+      videos: "Videos"
+      comments: "Comments"
+    field_types:
+      text: 'Text'
+      number: 'Number'
+      percentage: 'Percentage'
+      currency: 'Currency'
+      checkbox: 'Checkbox'
+      dropdown: 'Dropdown'
+      radio: 'Radio'
+
+  form_fields_ranges:
+    number:
+      min_max: 'Enter a number between %{range_min} and %{range_max} %{range_format}'
+      min: 'Enter a number %{range_min} or higher'
+      min_digits: 'Enter a number with %{range_min} digits or higher'
+      max: 'Enter a number no higher than %{range_max}'
+      max_digits: 'Enter a number with no higher than %{range_max} digits'
+    currency:
+      min_max: 'Enter a number between %{range_min} and %{range_max} %{range_format}'
+      min: 'Enter a number %{range_min} or higher'
+      min_digits: 'Enter a number with %{range_min} digits or higher'
+      max: 'Enter a number no higher than %{range_max}'
+      max_digits: 'Enter a number with no higher than %{range_max} digits'
+    text:
+      min_max: 'Must be between %{range_min} and %{range_max} %{range_format} <span class="range-counter-container">Currently: <span id="item-counter-%{field_id}">0</span> %{range_format}</span>'
+      min: 'Must be at least %{range_min} %{range_format} <span class="range-counter-container">Currently: <span id="item-counter-%{field_id}">0</span> %{range_format}</span>'
+      max: 'Must be no more than %{range_max} %{range_format} <span class="range-counter-container">Currently: <span id="item-counter-%{field_id}">0</span> %{range_format}</span>'
+    textarea:
+      min_max: 'Must be between %{range_min} and %{range_max} %{range_format} <span class="range-counter-container">Currently: <span id="item-counter-%{field_id}">0</span> %{range_format}</span>'
+      min: 'Must be at least %{range_min} %{range_format} <span class="range-counter-container">Currently: <span id="item-counter-%{field_id}">0</span> %{range_format}</span>'
+      max: 'Must be no more than %{range_max} %{range_format} <span class="range-counter-container">Currently: <span id="item-counter-%{field_id}">0</span> %{range_format}</span>'
+
+  campaign_module_ranges:
+    photos:
+      min_max: 'Between %{range_min} and %{range_max} photos are required for this event.'
+      min: 'There are at least %{range_min} photos required for this event.'
+      max: 'No more than %{range_max} photos can be uploaded for this event.'
+    expenses:
+      min_max: 'Between %{range_min} and %{range_max} expenses are required for this event.'
+      min: 'There are at least %{range_min} expenses required for this event.'
+      max: 'No more than %{range_max} expenses can be created for this event.'
+    comments:
+      min_max: 'Between %{range_min} and %{range_max} comments are required for this event.'
+      min: 'There are at least %{range_min} comments required for this event.'
+      max: 'No more than %{range_max} comments can be captured for this event.'
+
+  incomplete_execute_steps:
+    per:
+      edit: 'complete your Post Event Recap'
+      read_only: 'view your Post Event Recap'
+    activities:
+      edit: 'create event activities'
+      read_only: 'view event activities'
+    photos:
+      edit: 'upload event photos'
+      read_only: 'view event photos'
+    expenses:
+      edit: 'log event expenses'
+      read_only: 'view event expenses'
+    comments:
+      edit: 'add consumer comments'
+      read_only: 'view consumer comments'
+    attendance:
+      edit: 'add event invites'
+      read_only: 'view event invites'
+
+  instructive_messages:
+    plan:
+      still: 'You are still in the planning phase of your event. Check back on %{date} to %{actions}.'
+      contact:
+        add: 'Do you want to keep track of any contacts? This is optional.'
+        empty: 'There are not any contacts to view for this event'
+        details: 'View the details of event contacts below'
+        added:
+          one: 'Good work. One contact have been added.'
+          other: 'Good work. %{count} contacts have been added.'
+        added_more: '%{contacts_count} contacts have been added. Would you like to include more?'
+        removed: '%{contact_full_name} has been removed from the event contacts'
+      task:
+        add: 'Are there any tasks that need to be completed for your event? This is optional.'
+        empty: 'There are no tasks to view at this time'
+        assigned_user: 'You have %{tasks_count} tasks assigned to you. Would you like to work on these now?'
+        assigned_team: 'There are %{tasks_count} tasks assigned to your event team. Would you like to work on these now?'
+        assigned_user_team: 'You have %{tasks_count} tasks assigned to you and y tasks assigned to your event team. Would you like to work on these now?'
+        completed: 'Congrats! Your task has been completed.'
+        added: 'Excellent. Your task has been created.'
+        commented: 'Way to go! Your comment has been added and the event team has been notified.'
+        deactivated: 'Your task has been deactivated'
+        updated: 'Your task has been updated'
+      document:
+        add: 'Are there any supporting documents to add? This is optional.'
+        empty: 'There are no documents for this event at this time'
+        manage: 'View and manage supporting documents below'
+        view: 'View supporting documents for this event below'
+        added: 'All set. The documents have been added to your event.'
+        removed: 'Your document has been removed'
+        folder_added: 'The folder "%{folder_name}" has been created'
+        moved: 'Your document has been moved into the "%{folder_name}" folder'
+    execute:
+      per:
+        add: 'Ready to fill out your Post Event Recap? This is required.'
+        pending: 'The Post Event Recap is not ready to view at this time'
+        saved: 'Your Post Event Recap has been completed. Would you like to make some changes?'
+        completed: 'Looks good! Your Post Event Recap is complete.'
+        failed: 'Oops. It looks like there are issues with your Post Event Recap that are preventing it from being saved'
+        view: 'View your Post Event Recap below'
+      activity:
+        add: 'Do you have any activities to add? This is optional.'
+        empty: 'There are no activities to view at this time'
+        added:
+          one: 'Nice work. One %{activity_type} activity has been added.'
+          other: 'Nice work. %{count} %{activity_type} activities have been added.'
+        added_more: '%{activities_count} activities have been added. Would you like to add more?'
+        deactivated: 'Your %{activity_type} activity has been deactivated'
+        view: 'View your event activities below'
+      attendance:
+        add: 'Do you have any attendances to add? This is optional.'
+        empty: 'There are no attendances to view at this time'
+        added: 'Nice work. %{attendances_count} attendances have been added.'
+        added_more: '%{attendances_count} attendances have been added. Would you like to add more?'
+        deactivated: 'Your %{attendances_type} attendances has been deactivated'
+        view: 'View your event attendances below'
+      photo:
+        add: 'Do you have any event photos to upload? This is optional.'
+        add_min:
+          one: 'Do you have any event photos to upload? At least one photo is required.'
+          other: 'Do you have any event photos to upload? At least %{count} photos are required.'
+        add_max:
+          one: 'Do you have any event photos to upload? Only one photo can be uploaded for this event.'
+          other: 'Do you have any event photos to upload? No more than %{count} photos can be uploaded for this event.'
+        add_min_max: 'Do you have any event photos to upload? Between %{min} and %{max} photos are required.'
+        add_exceeded:
+          one: 'No more than one photo can be uploaded for this event.'
+          other: 'No more than %{count} photos can be uploaded for this event.'
+        empty: 'There are no photos to view at this time'
+        added: 'Looks great. The photos have been uploaded.'
+        deactivated: 'Your Photo has been deactivated'
+        view: 'View your event photos below'
+      comment:
+        add: 'Do you have consumer comments to add? This is optional.'
+        add_min:
+          one: 'Do you have consumer comments to add? At least one comment is required.'
+          other: 'Do you have consumer comments to add? At least %{count} comments are required.'
+        add_max:
+          other: 'Do you have consumer comments to add? No more than %{count} comments can be logged for this event.'
+          one: 'Do you have consumer comments to add? Only one comment can be logged for this event.'
+        add_min_max: 'Do you have consumer comments to add? Between %{min} and %{max} comments are required.'
+        add_exceeded:
+          one: 'Oops. No more than one comment can be added to this event. Your comment was not saved.'
+          other: 'Oops. No more than %{count} comments can be added to this event. Your comment was not saved.'
+        empty: 'There are no comments to view at this time'
+        added: 'Looks good. Your comment has been saved.'
+        deactivated: 'Your Comment has been deactivated'
+        view: 'View consumer comments for your event below'
+      expense:
+        add: 'Do you have expenses to add? This is optional.'
+        add_min:
+          one: 'Do you have expenses to add? At least one expense is required.'
+          other: 'Do you have expenses to add? At least %{count} expenses are required.'
+        add_max:
+          one: 'Do you have expenses to add? Only one expense can be logged for this event.'
+          other: 'Do you have expenses to add? No more than %{count} expenses can be logged for this event.'
+        add_min_max: 'Do you have expenses to add? Between %{min} and %{max} expenses are required.'
+        add_exceeded:
+          new:
+            one: 'Sorry. No more than one expense can be logged for this event.'
+            other: 'Sorry. No more than %{count} expenses can be logged for this event.'
+          create:
+            one: 'Sorry. No more than %{count} expenses can be logged for this event. Your expense was not saved.'
+            other: 'Sorry. No more than %{count} expenses can be logged for this event. Your expense was not saved.'
+        empty: 'There are no expenses logged at this time'
+        added: 'Good work. Your expense has been recorded.'
+        deactivated: 'Your Expense has been deactivated'
+        split: 'Your expense has successfully been split'
+        view: 'View expenses that have been logged for your event below'
+      submit:
+        success: 'Great job! Your PER has been submitted for approval.'
+        fail: 'Oops! %{event_requirements} before you can submit your event for approval'
+      approve: 'The Execute phase of your event is not complete. You can approve your event once it has been submitted for review.'
+      reject: 'The Execute phase of your event is not complete. You can reject your event once it has been submitted for review.'
+    results:
+      completed: 'Great job! You have successfully completed your event. Do not forget to submit for approval.'
+      approved: 'Nice! Your event has been Approved.'
+      rejected: 'Thanks. The event has been Rejected and the event team has been notified.'
+      rejected_info: 'Your event has been rejected %{rejected_at} for the following reason(s): <span class="reject-reason">"%{reject_reason}"</span>'
+      unapprove: 'Your event have been Unapproved.'
+      approve_per:
+        can_approve: 'Your post event report has been submitted for approval %{submitted_at}. %{rejection_message}. Please review and either approve or reject.'
+        cannot_approve: 'Your post event report has been submitted for approval #{submitted_at}. Once your report has been reviewed you will be alerted in your notifications.'
+        rejection_reason: 'It was previously rejected %{rejected_at} for the following reason: <i>%{reason}.</i>'
+
+  invalid_submit_messages:
+    per: 'Your Post Event Recap must be saved'
+    photos:
+      min_max: 'Between %{range_min} and %{range_max} photos are required'
+      min: 'At least %{range_min} photos must be uploaded'
+      max: 'No more than %{range_max} photos can be uploaded'
+    expenses:
+      min_max: 'Between %{range_min} and %{range_max} expenses are required'
+      min: 'At least %{range_min} expenses must be logged'
+      max: 'No more than %{range_max} expenses can be logged'
+    comments:
+      min_max: 'Between %{range_min} and %{range_max} comments are required'
+      min: 'At least %{range_min} comments must be added'
+      max: 'No more than %{range_max} comments can be added'
+
+  errors:
+    result:
+      invalid: 'is not valid'
+
+  venue_types:
+    accounts: "Accounts"
+    airport: "Airport"
+    amusement_park: "Amusement Park"
+    aquarium: "Aquarium"
+    art_gallery: "Art Gallery"
+    atm: "ATM"
+    bakery: "Bakery"
+    bank: "Bank"
+    bar: "Bar"
+    beauty_salon: "Beauty Salon"
+    bicycle_store: "Bicycle Store"
+    book_store: "Book Store"
+    bowling_alley: "Bowling Alley"
+    bus_station: "Bus Station"
+    cafe: "Cafe"
+    campground: "Campground"
+    car_dealer: "Car dealer"
+    car_rental: "Car rental"
+    car_repair: "Car repair"
+    car_wash: "Car wash"
+    casino: "Casino"
+    cemetery: "Cemetery"
+    church: "Church"
+    city_hall: "City Hall"
+    clothing_store: "Clothing store"
+    convenience_store: "Convenience store"
+    courthouse: "Courthouse"
+    dentist: "dentist"
+    department_store: "Department Store"
+    doctor: "Doctor"
+    electrician: "Electrician"
+    electronics_store: "Electronics Store"
+    embassy: "Embassy"
+    establishment: "Establishment"
+    finance: "Finance"
+    fire_station: "Fire Station"
+    florist: "Florist"
+    food: "Food"
+    funeral_home: "Funeral Home"
+    furniture_store: "Furniture Store"
+    gas_station: "Gas Station"
+    general_contractor: "General Contractor"
+    grocery_or_supermarket: "Grocery or supermarket"
+    gym: "GYM"
+    hair_care: "Hair Care"
+    hardware_store: "Hardware store"
+    health: "Health"
+    hindu_temple: "Hindu Temple"
+    home_goods_store: "Home Goods Store"
+    hospital: "Hospital"
+    insurance_agency: "Insurance Agency"
+    jewelry_store: "Jewelry Store"
+    laundry: "laundry"
+    lawyer: "Lawyer"
+    library: "Library"
+    liquor_store: "Liquor Store"
+    local_government_office: "Local Government Office"
+    locksmith: "Locksmith"
+    lodging: "Lodging"
+    meal_delivery: "meal delivery"
+    meal_takeaway: "Meal takeaway"
+    mosque: "Mosque"
+    movie_rental: "Movie Rental"
+    movie_theater: "Movie Theater"
+    moving_company: "Moving Company"
+    museum: "Museum"
+    night_club: "Night Club"
+    painter: "Painter"
+    park: "Park"
+    parking: "Parking"
+    pet_store: "Pet store"
+    pharmacy: "Pharmacy"
+    physiotherapist: "Physiotherapist"
+    place_of_worship: "Place of worship"
+    plumber: "Plumber"
+    police: "Police"
+    post_office: "Post Office"
+    real_estate_agency: "Real estate agency"
+    restaurant: "Restaurant"
+    roofing_contractor: "Roofing contractor"
+    rv_park: "RV Park"
+    school: "School"
+    shoe_store: "Shoe Store"
+    shopping_mall: "Shopping Mall"
+    spa: "SPA"
+    stadium: "Stadium"
+    storage: "Storage"
+    store: "Store"
+    subway_station: "Subway Station"
+    synagogue: "Synagogue"
+    taxi_stand: "Taxi Stand"
+    train_station: "Train station"
+    travel_agency: "Travel agency"
+    university: "University"
+    veterinary_care: "Veterinary Care"
+    zoo: "ZOO"
+    administrative_area_level_1: "Administrative area level 1"
+    administrative_area_level_2: "Administrative area level 2"
+    administrative_area_level_3: "Administrative area level 3"
+    colloquial_area: "Colloquial Area"
+    country: "Country"
+    floor: "Floor"
+    geocode: "Geocode"
+    intersection: "Intersection"
+    locality: "Locality"
+    natural_feature: "Natural Feature"
+    neighborhood: "Neighborhood"
+    political: "Political"
+    point_of_interest: "Point of interest"
+    post_box: "Post box"
+    postal_code: "Postal code"
+    postal_code_prefix: "Postal code prefix"
+    postal_town: "Postal town"
+    premise: "Premise"
+    room: "Room"
+    route: "Route"
+    street_address: "Street address"
+    street_number: "Street number"
+    sublocality: "Sublocality"
+    sublocality_level_4: "Sublocality level 4"
+    sublocality_level_5: "Sublocality level 5"
+    sublocality_level_3: "Sublocality level 3"
+    sublocality_level_2: "Sublocality level 2"
+    sublocality_level_1: "Sublocality level 1"
+    subpremise: "Subpremise"
+    transit_station: "Transit Station"
+
+  dashboard:
+    intro_message: "Track progress against event and promo hour goals for your campaigns"
+
+  confirm:
+    deactivate:
+      activity: "Are you sure you want to deactivate this activity?"
+      event: "Are you sure you want to deactivate this event?"
+      event_expense: "Are you sure you want to deactivate this expense?"
+      company_user: "Are you sure you want to deactivate this user?"
+      team: "Are you sure you want to deactivate this team?"
+      campaign: "Are you sure you want to deactivate this campaign?"
+      role: "%{name} users can no longer login if you deactivate that role. Would you like to continue?"
+      area: "Are you sure you want to deactivate this area?"
+      brand: "Are you sure you want to deactivate this brand?"
+      brand_portfolio: "Are you sure you want to deactivate this brand portfolio?"
+      date_range: "Are you sure you want to deactivate this date range?"
+      day_part: "Are you sure you want to deactivate this day part?"
+      activity_type: "Are you sure you want to deactivate this activity type?"
+      report: "Are you sure you want to deactivate this report?"
+      brand_ambassadors/visit: "Are you sure you want to deactivate this visit?"
+      invite: "Are you sure you want to deactivate this invitation record?"
+      invite_individual: "Are you sure you want to deactivate this invitation record?"
+      data_extract/activity: "Are you sure you want to deactivate this report?"
+      data_extract/activity_type: "Are you sure you want to deactivate this report?"
+      data_extract/area: "Are you sure you want to deactivate this report?"
+      data_extract/attendance: "Are you sure you want to deactivate this report?"
+      data_extract/brand_portfolio: "Are you sure you want to deactivate this report?"
+      data_extract/brand: "Are you sure you want to deactivate this report?"
+      data_extract/campaign: "Are you sure you want to deactivate this report?"
+      data_extract/comment: "Are you sure you want to deactivate this report?"
+      data_extract/contact: "Are you sure you want to deactivate this report?"
+      data_extract/date_range: "Are you sure you want to deactivate this report?"
+      data_extract/day_part: "Are you sure you want to deactivate this report?"
+      data_extract/event: "Are you sure you want to deactivate this report?"
+      data_extract/event_expense: "Are you sure you want to deactivate this report?"
+      data_extract/event_data: "Are you sure you want to deactivate this report?"
+      data_extract/role: "Are you sure you want to deactivate this report?"
+      data_extract/task: "Are you sure you want to deactivate this report?"
+      data_extract/team: "Are you sure you want to deactivate this report?"
+      data_extract/company_user: "Are you sure you want to deactivate this report?"
+      data_extract/venue: "Are you sure you want to deactivate this report?"
+      data_extract/invite: "Are you sure you want to deactivate this report?"
+      data_extract/invite_individual: "Are you sure you want to deactivate this report?"
+    invitations:
+      resend: "Are you sure you want to resend the invitation to this user?"
+
+  confirmation:
+    deactivate: "Deactivate"
+    activate: "Activate"
+    deactivate_confirm_message: "Are you sure you want to deactivate this %{model}?"
+
+  role_permissions_tip: "<div class=role-help-tooltip><p>NO PERMISSIONS - Users in this role will not have any access to this item</p><p>MY CAMPAIGNS - Users in this role will only have access to this item for Campaigns that they have been directly granted access to.</p><p>ALL CAMPAIGNS - Users in this role will have access to this item for ALL of this company\'s Campaigns.</p></div>"
+
+  data_exports:
+    fields:
+      attendees: "Attendees"
+      invitees: "Invites"
+      rsvps: "RSVPs"
+      zip_code: "Zip Code"
+      campaign_name: "Campaign"
+      area_name: "Area"
+      end_date: "End Date"
+      end_time: "End Time"
+      start_date: "Start Date"
+      start_time: "Start Time"
+      place_street: "Venue Street"
+      place_name: "Venue Name"
+      place_city: "Venue City"
+      place_state: "Venue State"
+      place_zipcode: "Venue ZIP Code"
+      event_team_members: "Event Team"
+      event_status: "Event Status"
+      status: "Active State"
+      name: "Name"
+      description: "Description"
+      created_at: "Created At"
+      modified_at: "Modified At"
+      approved_at: "Approved At"
+      submitted_at: "Submitted At"
+      venues_types: "Types"
+      street: "Venue Street"
+      city: "City"
+      state_name: "State"
+      state: "State"
+      country_name: "Country"
+      country: "Country"
+      score: "Score"
+      zipcode: "ZIP code"
+      zip_code: "ZIP code"
+      td_linx_code: "TD Linx Code"
+      place_td_linx_code: "TD Linx Code"
+      title: "Title"
+      task_statuses: "Statuses"
+      due_at: "Due At"
+      first_name: "First Name"
+      last_name: "Last Name"
+      teams_name: "Teams"
+      email: "Email"
+      phone_number: "Phone Number"
+      role_name: "Role"
+      street_address: "Street Address"
+      time_zone: "Time Zone"
+      color: "Color"
+      brands_list: "Brands"
+      brand_name: "Brand"
+      marques_list: "Marques"
+      campaign_brand_portfolios: "Brand Portfolios"
+      created_by: "Created By"
+      modified_by: "Modified By"
+      street1: "Address"
+      street2: "Address 2"
+      assigned_to: "Assigned To"
+      comment1: "Comment 1"
+      comment2: "Comment 2"
+      comment3: "Comment 3"
+      comment4: "Comment 4"
+      comment5: "Comment 5"
+      address1: 'Address 1'
+      address2: 'Address 2'
+      comment: 'Comment'
+      amount: 'Amount'
+      activity_type: 'Activity Type'
+      user: 'User'
+      activity_date: 'Date'
+      event_start_date: 'Event Start Date'
+      event_start_time: 'Event Start Time'
+      event_end_date: 'Event End Date'
+      event_end_time: 'Event End Time'
+      active_state: "Active State"
+      category: "Category"
+      expense_date: "Date"
+      reimbursable: "Reimbursable"
+      billable: "Billable"
+      merchant: "Merchant"
+      employee: "Employee"
+      visit_type: "Visit Type"
+      invite:
+        start_date: "Event Start Date"
+        start_date: 'Event Start Date'
+        start_time: 'Event Start Time'
+        end_date: 'Event End Date'
+        end_time: 'Event End Time'
+        end_time: 'Event End Time'
+        campaign_name: 'Event Campaign Name'
+        place_name: 'Event Venue Name'
+        place_street: 'Event Venue Street'
+        place_city: 'Event Venue City'
+        place_state: 'Event Venue State'
+        place_zipcode: 'Event Venue Zip Code'
+        venue_name: 'Venue Name'
+        venue_street: 'Venue Street'
+        venue_city: 'Venue City'
+        venue_state: 'Venue State'
+        venue_zipcode: 'Venue Zip Code'
+        venue_phone_number: 'Venue Phone Number'
+      invite_individual:
+        start_date: "Event Start Date"
+        start_date: 'Event Start Date'
+        start_time: 'Event Start Time'
+        end_date: 'Event End Date'
+        end_time: 'Event End Time'
+        end_time: 'Event End Time'
+        campaign_name: 'Event Campaign Name'
+        place_name: 'Event Venue Name'
+        place_street: 'Event Venue Street'
+        place_city: 'Event Venue City'
+        place_state: 'Event Venue State'
+        place_zipcode: 'Event Venue Zip Code'
+        phone_number: 'Phone Number'
+        venue: 'Venue'
+        city: 'City'
+        province_code: 'State'
+        country_code: 'Country'
+        address_line_1: 'Address Line 1'
+        address_line_2: 'Address Line 2'
+    descriptions:
+      event:
+        campaign_name: "The assigned campaign of the event"
+        end_date: "The end date of the event"
+        end_time: "The end time of the event"
+        start_date: "The start date of the event"
+        start_time: "The start time of the event"
+        place_street: "The street address of the event"
+        place_city: "The city the event is located"
+        place_name: "The name of the event's venue"
+        place_state: "The state the event is located"
+        place_zipcode: "The ZIP code the event is located"
+        event_team_members: "The event team members"
+        event_status: "The status of the event (ex., approved, due, late)"
+        created_by: "The person who created the event"
+        created_at: "The date the event was created"
+        modified_by: "The person who modified the event"
+        modified_at: "The date the event was modified"
+        approved_at: "The date the event was approved"
+        submitted_at: "The date the event was submitted"
+        status: "The active state of the event"
+      event_data:
+        campaign_name: "The assigned campaign of the event"
+        end_date: "The end date of the event"
+        end_time: "The end time of the event"
+        start_date: "The start date of the event"
+        start_time: "The start time of the event"
+        place_street: "The street address of the event"
+        place_city: "The city the event is located"
+        place_name: "The name of the event's venue"
+        place_state: "The state the event is located"
+        place_zipcode: "The ZIP code the event is located"
+        event_team_members: "The event team members"
+        event_status: "The status of the event (ex., approved, due, late)"
+        status: "The active state of the event"
+      activity:
+        activity_type: "The type of activity captured"
+        user: "The person who created the activity"
+        activity_date: "The date the activity was created"
+        campaign_name: "The assigned campaign of the activity"
+        event_start_date: "The start date of the event"
+        event_start_time: "The start time of the event"
+        event_end_date: "The end date of the event"
+        event_end_time: "The end time of the event"
+        place_street: "The street address of the event"
+        place_city: "The city the event is located"
+        place_name: "The name of the event's venue"
+        place_state: "The state the event is located"
+        place_zipcode: "The ZIP code the event is located"
+        created_by: "The person who created the activity"
+        created_at: "The date the activity was created"
+        modified_by: "The person who modified the activity"
+        modified_at: "The date the activity was modified"
+        event_status: "The status of the event (ex., approved, due, late)"
+        status: "The active state of the event (ex., active or inactive)"
+      comment:
+        comment: "Comments captured at the event"
+        campaign_name: "The assigned campaign of the comment"
+        start_date: "The start date of the event"
+        start_time: "The start time of the event"
+        end_date: "The end date of the event"
+        end_time: "The end time of the event"
+        event_status: "The status of the event (ex., approved, due, late)"
+        street: "The street address of the event"
+        place_city: "The city the event is located"
+        place_name: "The name of the event's venue"
+        place_state: "The state the event is located"
+        place_zipcode: "The ZIP code the event is located"
+        created_by: "The person who created the comment"
+        created_at: "The date the comment was created"
+        modified_by: "The person who modified the comment"
+        modified_at: "The date the comment was modified"
+      contact:
+        first_name: "The contact's first name"
+        last_name: "The contact's last name"
+        title: "The contact's title"
+        email: "The contact's email"
+        phone_number: "The contac's phone number"
+        street1: "The contact's street address"
+        street2: "The contact's supplemental address (ex., apartment, suite, etc.)"
+        country: "The contact's country"
+        state: "The contact's state"
+        city: "The contact's city"
+        zip_code: "The contact's ZIP code"
+        created_by: "The person who created the contact"
+        created_at: "The date the contact was created"
+        modified_by: "The person who modified the contact"
+        modified_at: "The date the contact was modified"
+      event_expense:
+        name: "The name of the expense"
+        amount: "The expense's amount"
+        campaign_name: "The assigned campaign of the expense"
+        brand_name: "The assigned brand of the expense"
+        end_date: "The end date of the event"
+        end_time: "The end time of the event"
+        start_date: "The start date of the event"
+        start_time: "The start time of the event"
+        event_status: "The status of the event (ex., approved, due, late)"
+        area: "The area of the event"
+        td_linx_code: "The TD Linx Code of the event"
+        place_street: "The street address of the event"
+        place_city: "The city the event is located"
+        place_name: "The name of the event's venue"
+        place_state: "The state the event is located"
+        place_zipcode: "The ZIP code the event is located"
+        created_by: "The person who created the expense"
+        created_at: "The date the expense was created"
+        modified_by: "The person who modified the expense"
+        modified_at: "The date the expense was modified"
+      task:
+        title: "The title of the task"
+        task_statuses: "The status of the task (ex., complete, incomplete, late)"
+        due_at: "The date the task is due"
+        created_by: "The person who created the task"
+        created_at: "The date the task was created"
+        modified_by: "The person who modified the task"
+        modified_at: "The date the task was modified"
+        assigned_to: "The user the task is assigned to"
+        comment1: "Comments added to the task"
+        comment2: "Comments added to the task"
+        comment3: "Comments added to the task"
+        comment4: "Comments added to the task"
+        comment5: "Comments added to the task"
+        active_state: "The active state of the task (ex., active or inactive)"
+      place:
+        name: "The name of the venue"
+        venues_types: "The venue type (ex., bar, restaurant, etc.)"
+        street: "The venue street address"
+        city: "The city the venue is located"
+        state_name: "The state the venue is located"
+        country_name: "The country the venue is located"
+        score: "The venue score"
+        zipcode: "The ZIP code the venue is located"
+        place_td_linx_code: "The venue's TD Linx Code"
+        created_by: "The person who created the venue"
+        created_at: "The date the venue was created"
+        modified_by: "The person who modified the venue"
+        modified_at: "The date the venue was modified"
+      company_user:
+        first_name: "The user's first name"
+        last_name: "The user's last name"
+        teams_name: "The assigned teams of the user"
+        email: "The user's email"
+        phone_number: "The user's phone number"
+        role_name: "The user's role"
+        address1: "The user's steet address"
+        address2: "The user's supplemental address (ex., apartment, suite, etc.)"
+        country: "The user's country"
+        city: "The user's city"
+        state: "The user's state"
+        zip_code: "The user's ZIP code"
+        time_zone: "The user's time zone"
+        created_by: "The person who created the user"
+        created_at: "The date the user was created"
+        modified_by: "The person who modified the user"
+        modified_at: "The date the user was modified"
+        active_state: "The active state of the user (ex., active or inactive)"
+      team:
+        name: "The name of the team"
+        description: "The description of the team"
+        created_by: "The person who created the team"
+        created_at: "The date the team was created"
+        modified_by: "The person who modified the team"
+        modified_at: "The date the team was modified"
+        active_state: "The active state of the team (ex., active or inactive)"
+      role:
+        name: "The name of the role"
+        description: "The description of the role"
+        created_by: "The person who created the role"
+        created_at: "The date the role was created"
+        modified_by: "The person who modified the role"
+        modified_at: "The date the role was modified"
+        active_state: "The active state of the role (ex., active or inactive)"
+      campaign:
+        name: "The name of the campaign"
+        description: "The description of the campaign"
+        brands_list: "The assigned brands of the campaign"
+        campaign_brand_portfolios: "The assigned brand portfolios of the campaign"
+        start_date: "The start date of the campaign"
+        end_date: "The end date of the campaign"
+        color: "The assigned color of the campaign"
+        created_by: "The person who created the campaign"
+        created_at: "The date the campaign was created"
+        modified_by: "The person who modified the campaign"
+        modified_at: "The date the campaign was modified"
+        active_state: "The active state of the campaign (ex., active or inactive)"
+      brand:
+        name: "The name of the brand"
+        marques_list: "The assigned marques of the brand"
+        created_by: "The person who created the brand"
+        created_at: "The date the brand was created"
+        modified_by: "The person who modified the brand"
+        modified_at: "The date the brand was modified"
+        active_state: "The active state of the brand (ex., active or inactive)"
+      activity_type:
+        name: "The name of the activity type"
+        description: "The description of the activity type"
+        created_by: "The person who created the activity type"
+        created_at: "The date the activity type was created"
+        modified_by: "The person who modified the activity type"
+        modified_at: "The date the activity type was modified"
+        active_state: "The active state of the activity type (ex., active or inactive)"
+      area:
+        name: "The name of the area"
+        description: "The description of the area"
+        created_by: "The user who created the area"
+        created_at: "The date the area was created"
+        modified_by: "The person who modified the area"
+        modified_at: "The date the area was modified"
+        active_state: "The active state of the area (ex., active or inactive)"
+      brand_portfolio:
+        name: "The name of the brand portfolio"
+        description: "The description of the brand portfolio"
+        created_by: "The person who creatd the brand portfolio"
+        created_at: "The date the brand portfolio was created"
+        modified_by: "The person who modified the brand portfolio"
+        modified_at: "The date the brand portfolio was modified"
+        active_state: "The active state of the brand portfolio (ex., active or inactive)"
+      date_range:
+        name: "The name of the date range"
+        description: "The description of the date range"
+        created_by: "The person who created the date range"
+        created_at: "The date the date range was created"
+        modified_by: "The person who modified the date range"
+        modified_at: "The date the date range was modified"
+        active_state: "The active state of the date range (ex., active or inactive)"
+      day_part:
+        name: "The name of the day part"
+        description: "The description of the day part"
+        created_by: "The person who created the day part"
+        created_at: "The date the day part was created"
+        modified_by: "The person who modified the day part"
+        modified_at: "The date the day part was modified"
+        active_state: "The active state of the day part (ex., active or inactive)"
+      brand_ambassadors_visit:
+        employee: "The user the visit is assigned to"
+        campaign_name: "The assigned campaign of the visit"
+        area_name: "The assigned area of the visit"
+        city: "The assigned city of the visit"
+        visit_type: "The assigned type of the visit"
+        start_date: "The start date of the visit"
+        end_date: "The end date of the visit"
+        created_at: "The date the visit was created"
+        modified_at: "The date the visit was modified"
+      invite:
+        attendees: "The number of attendes of the invitation"
+        invitees: "The number of invitees of the invitation"
+        rsvps: "The number of RSVP's of the invitation"
+        campaign_name: "The name of the campaign associated with the event"
+        end_date: "The end date of the event"
+        end_time: "The end time of the event"
+        start_date: "The start date of the event"
+        start_time: "The start time of the event"
+        place_name: "The name of the venue where the event is taking place"
+        place_street: "The street address of the venue where the event is taking place"
+        place_city: "The city of the venue where the event is taking place"
+        place_state: "The state of the venue where the event is taking place"
+        place_zipcode: "The ZIP code of the venue where the event is taking place"
+        venue_name: "Name of the venue that was invited to, RSVP'd to and/or attended the event"
+        venue_phone_number: "Primary phone number of the venue that was invited to, RSVP'd to and/or attended the event"
+        venue_street: "Address of the venue that was invited to, RSVP'd to and/or attended the event"
+        venue_city: "City where the venue that was invited to, RSVP'd to and/or attended the event is located"
+        venue_state: "State where the venue that was invited to, RSVP'd to and/or attended the event is located"
+        venue_zipcode: "ZIP code for where the venue that was invited to, RSVP'd to and/or attended the event is located"
+        event_status: "The status of the event (ex., approved, due, late)"
+        created_by: "The person who created the invitation"
+        created_at: "The date the invitation was created"
+        modified_by: "The person who modified the invitation"
+        modified_at: "The date the invitation was modified"
+        active_state: "The active state of the invitation"
+      invite_individual:
+        first_name: "First Name of the person who was invited to, RSVP'd to and/or attended the event"
+        last_name: "Last Name of the person who was invited to, RSVP'd to and/or attended the event"
+        email: "Email address of the person who was invited to, RSVP'd to and/or attended the event"
+        date_of_birth: "Birthday of the person who was invited to, RSVP'd to and/or attended the event"
+        mobile_phone: "Mobile phone number of the person who was invited to, RSVP'd to and/or attended the event"
+        mobile_signup: "Mobile Signup"
+        attended_previous_bartender_ball: "Attended previous bartender ball?"
+        attended: "Did the person attend the event?"
+        rsvpd: "Did the person RSVP to the event?"
+        zip_code: "ZIP code where the person who was invited to, RSVP'd to and/or attended the event lives"
+        campaign_name: "The name of the campaign associated with the event"
+        end_date: "The end date of the event"
+        end_time: "The end time of the event"
+        start_date: "The start date of the event"
+        start_time: "The start time of the event"
+        place_name: "The name of the venue where the event is taking place"
+        place_street: "The street address of the venue where the event is taking place"
+        place_city: "The city of the venue where the event is taking place"
+        place_state: "The state of the venue where the event is taking place"
+        place_zipcode: "The ZIP code of the venue where the event is taking place"
+        venue: "Venue/account where the person who was invited to, RSVP'd to and/or attended the event works"
+        event_status: "The status of the event (ex., approved, due, late)"
+        created_by: "The person who created the invitation"
+        created_at: "The date the invitation was created"
+        modified_by: "The person who modified the invitation"
+        modified_at: "The date the invitation was modified"
+        active_state: "The active state of the invitation"
+        phone_number: "Primary phone number of the person who was invited to, RSVP'd to and/or attended the event"
+        city: "City where the person who was invited to, RSVP'd to and/or attended the event lives"
+        province_code: "State where the person who was invited to, RSVP'd to and/or attended the event lives"
+        country_code: "Country where the person who was invited to, RSVP'd to and/or attended the event lives"
+        address_line_1: "Address where the person who was invited to, RSVP'd to and/or attended the event lives"
+        address_line_2: "Address where the person who was invited to, RSVP'd to and/or attended the event lives"
+
+  analysis:
+    campaign_summary:
+      title: 'SUMMARY'
+      group_by: 'Group by:'
+      group_status: 'Event Status'
+      group_campaign: 'Campaign'
+      group_area: 'Area'
+      group_people: 'People'
+      filter:
+        placeholder: 'Search for campaigns'
+        reset: 'Reset'

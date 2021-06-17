@@ -1,0 +1,30 @@
+doctype html
+html lang="en"
+  head
+    meta charset="utf-8"
+    = stylesheet_link_tag "http://fonts.googleapis.com/css?family=Lato:100,300,400,700"
+    = javascript_include_tag "http://maps.googleapis.com/maps/api/js?key=#{GOOGLE_API_KEY}&libraries=places,geometry&sensor=false"
+    = wicked_pdf_stylesheet_link_tag 'plugins'
+    = wicked_pdf_stylesheet_link_tag 'pdf'
+    = wicked_pdf_javascript_include_tag 'pdf'
+    = yield :pdf_scripts
+
+
+  body class="app-layout #{controller_name} #{action_name}"
+
+    #main-container.container
+      #application-content
+        .row-fluid
+          .span12
+            = yield
+
+    javascript:
+      if (typeof window.status === 'undefined' || window.status === '') {
+        window.status='completed';
+      } else {
+        // Max time to wait before saying the page is loaded. Pages can set
+        // window.status to anything if it's required to wait for ajax requests
+        // before generating the PDF
+        setTimeout(function(){ window.status='completed'; }, 5000);
+      }
+

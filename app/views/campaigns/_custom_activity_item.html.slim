@@ -1,0 +1,7 @@
+.resource-item.clearfix id="custom-activity-#{activity.id}"
+  .resource-item-link
+    .span6.crop-text
+      .text-large= activity.name
+    .resource-item-actions.pull-right
+      = link_to '', custom_activity_form_path(resource, activity.id), remote: true, class: 'icon-edit', title: 'Edit'
+      = link_to '', '', remote: true, class: 'icon-rounded-disable', title: 'Remove', data: { confirm: 'Please confirm you want to remove this KPI?'}

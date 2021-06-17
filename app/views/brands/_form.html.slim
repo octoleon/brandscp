@@ -1,0 +1,26 @@
+- remote ||= false
+= simple_form_for([parent, resource], remote: remote || false) do |f|
+  = f.error_notification
+
+  .form-inputs
+    .row-fluid
+      = f.input :name, input_html: {class: 'input-xlarge'}
+
+    .row-fluid
+      = f.input :marques_list
+
+  .form-actions
+    = f.button :submit, class: 'btn-primary'
+    = f.button :button, 'Cancel', class: 'btn-cancel'
+
+javascript:
+  $('.btn-cancel').click(function(e){
+    e.preventDefault();
+    e.stopPropagation();
+    $(this).parents('.modal').modal('hide');
+    if ('#{parent.is_a? BrandPortfolio}' == 'true') {
+      selectBrandDialog.modal('show');
+    }
+  });
+
+  $('#brand_marques_list').select2({tags: []});

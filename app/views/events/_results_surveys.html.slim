@@ -1,0 +1,30 @@
+.results-surveys
+  h3.module-title SURVEY RESULTS
+  = link_to '', edit_surveys_event_path(resource), remote: true, class: 'icon-edit' if can?(:edit_survey, resource) || can?(:edit_surveys, resource)
+
+  - if resource.surveys.count > 0
+    p For each of the following brands, please let us know if you have purchased the product in the past 12 months, are aware of the product, or are unaware of the product
+    #question-1-graph.survey-column-graph
+
+
+    p For each brand that you have used, approximately how much do you spend each month?
+    #question-2-graph.survey-column-graph
+
+    p For each of the following brands, please let us know how likely you are to purchase the brand in the next 12 months? Please answer on a 1 to 5 scale where 1 = not at all likely and 5 = very likely.
+    #question-3-graph.survey-column-graph
+
+
+    p How likely are you to recommend the brand to a friend?  Please answer on a 0 to 10 scale where 0 is not at all likely and 10 = extremely likely
+    #question-4-graph.survey-column-graph
+
+    - if resource.survey_statistics.has_key?('question_1')
+      = render partial: 'shared/survey_graph', locals: {question_id: 1, series: series_question_1(resource.campaign.survey_brands, resource.survey_statistics['question_1']), brands: resource.campaign.survey_brands}
+    - if resource.survey_statistics.has_key?('question_2')
+      = render partial: 'shared/survey_graph', locals: {question_id: 2, series: series_question_2(resource.survey_statistics['question_2']), data_labels: true}
+    - if resource.survey_statistics.has_key?('question_3')
+      = render partial: 'shared/survey_graph', locals: {question_id: 3, series: series_question_3(resource.campaign.survey_brands, resource.survey_statistics['question_3']), brands: resource.campaign.survey_brands, data_labels: true}
+    - if resource.survey_statistics.has_key?('question_4')
+      = render partial: 'shared/survey_graph', locals: {question_id: 4, series: series_question_4(resource.campaign.survey_brands, resource.survey_statistics['question_4']), brands: resource.campaign.survey_brands, data_labels: true}
+
+  - else
+    p No surveys where entered for this event

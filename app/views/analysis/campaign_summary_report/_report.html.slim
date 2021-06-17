@@ -1,0 +1,41 @@
+- campaign_ids = @campaign_ids.join(',')
+- if @campaigns.any?
+  .sidebar#resource-filter-column
+    #collection-list-filters
+  #analysis-campaign.details_box.content.form-results-box.main.campaign-summary-box
+- else
+  #analysis-campaign.details_box.content.form-results-box
+    = render 'blank_state'
+javascript:
+  $('.collection-list-description').show();
+  $('#collection-list-filters').filteredList({
+    'source': '#{analysis_campaign_summary_report_items_path(campaign_summary: campaign_ids)}',
+    'filtersUrl': '#{filter_url(:campaign_summary, apply_to: controller_name)}',
+    'listContainer': '#analysis-campaign',
+    'applyTo': '#{controller_name}',
+    'userFilters': #{user_saved_filters(controller_name).to_json.html_safe},
+    'defaultParams': '#{j default_params_for_view()}',
+    'includeCalendars': true,
+    'selectDefaultDate': false,
+    'selectDefaultDateRange': false,
+    'includeSaveFilters': true,
+    'allowCustomizeFilters': true,
+    'ytdDatesRange': '#{current_company.ytd_dates_range}',
+    'customizedShow': true,
+    'includeAutoComplete': true,
+    'autoCompletePath': '#{autocomplete_path(controller_name, format: :json)}',
+    'onItemsLoad': function(response, page) {
+      params = 'campaign_summary=#{campaign_ids}&summary_group_by=#{@group_by}';
+      filters = $('#collection-list-filters').filteredList('paramsQueryString');
+      if (filters != "") {
+        params += '&' + filters
+      }
+      $.ajax({
+        url: '#{analysis_campaign_summary_report_result_path}',
+        data: params,
+        beforeSend: function(xhr) {
+          $('#analysis-campaign').html('<li class="loading-spinner">');
+        }
+      });
+    }
+  });

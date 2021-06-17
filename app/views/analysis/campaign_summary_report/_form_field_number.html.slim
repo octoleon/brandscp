@@ -1,0 +1,36 @@
+- field_title = form_field.kpi.present? ? form_field.kpi.name : form_field.name
+div.form-result-row
+  span.form-result-label= field_title
+  - if result.empty?
+    span.form-result-empty= I18n.translate(:'blank_states.campaign_summary.empty_field.default')
+  - else
+    -  precision_amount = (form_field.type == 'FormField::Number' && !form_field.kpi.nil? && form_field.kpi.capture_mechanism == 'decimal') ? 2 : 0
+    span.form-result-value
+      = form_field.type == 'FormField::Number' ? number_with_precision(result['total'], precision: precision_amount, delimiter: ',', separator: '.') : number_to_currency(result['total'], precision: 2, delimiter: ',', separator: '.')
+      span.total= 'TOTAL'
+    span.form-result-details
+      - if ['campaign', 'area', 'people'].include?(@group_by)
+        - result.reject!{|x, y| x == 'total'}
+        - results = showAll ? result : result.first(5)
+        - results.each do |r|
+          span.form-result-details-row.
+            span.title.simple.crop-text= r[0]
+            span.value.simple= number_with_precision(r[1], precision: 2, delimiter: ',', separator: '.')
+        - if result.count > 5  && !showAll
+          = link_to 'Show All', analysis_campaign_summary_report_show_all_path(title: field_title, type: form_field.type, result: result), class: 'show-all-link', remote: true
+      - else
+        span.form-result-details-row
+          span.title.approved= 'APPROVED'
+          span.value.approved= form_field.type == 'FormField::Number' ? number_with_precision(result['approved'], precision: precision_amount, delimiter: ',', separator: '.') : number_to_currency(result['approved'], precision: 2, delimiter: ',', separator: '.')
+        span.form-result-details-row
+          span.title.submitted= 'SUBMITTED'
+          span.value.submitted= form_field.type == 'FormField::Number' ? number_with_precision(result['submitted'], precision: precision_amount, delimiter: ',', separator: '.') : number_to_currency(result['submitted'], precision: 2, delimiter: ',', separator: '.')
+        span.form-result-details-row
+          span.title.due= 'DUE'
+          span.value.due= form_field.type == 'FormField::Number' ? number_with_precision(result['due'], precision: precision_amount, delimiter: ',', separator: '.') : number_to_currency(result['due'], precision: 2, delimiter: ',', separator: '.')
+        span.form-result-details-row
+          span.title.late= 'LATE'
+          span.value.late= form_field.type == 'FormField::Number' ? number_with_precision(result['late'], precision: precision_amount, delimiter: ',', separator: '.') : number_to_currency(result['late'], precision: 2, delimiter: ',', separator: '.')
+        span.form-result-details-row
+          span.title.rejected= 'REJECTED'
+          span.value.rejected= form_field.type == 'FormField::Number' ? number_with_precision(result['rejected'], precision: precision_amount, delimiter: ',', separator: '.') : number_to_currency(result['rejected'], precision: 2, delimiter: ',', separator: '.')

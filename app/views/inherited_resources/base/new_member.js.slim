@@ -1,0 +1,7 @@
+|
+  bootbox.classes('modal-large');
+  var selectMemberDialog = bootbox.dialog(
+                            $('#{escape_javascript(render "select_member_list")}'),
+                            [],
+                            {'onEscape': true, animate: (!$.fx.off), header: 'Add Staff'}
+                          )

@@ -1,0 +1,12 @@
+- @rendered_modules ||= {}
+- @buffer ||= []
+- results ||= resource.results_for(fields)
+- current_module ||= nil
+
+= hidden_field_tag :results_version, resource.results_version
+
+- results.each do |result|
+  = f.simple_fields_for :results, result do |rf|
+    .large-inputs class="#{result.form_field.css_class}"
+      = rf.input :value, result.form_field.field_options(result)
+      = rf.input_field :form_field_id, as: :hidden

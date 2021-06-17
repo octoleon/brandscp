@@ -1,0 +1,154 @@
+- content_for :footer
+  = javascript_include_tag "jquery.formBuilder"
+- content_for :head
+  = stylesheet_link_tag "form_builder"
+
+.row-fluid.with-details-close-bar
+  = resource_details_bar("You are viewing campaign details. Click to close.")
+
+  .details_box.padding-top-close-bar
+    .details-main-title
+      h2.pull-left= resource.name
+      .edition-links
+        = button_to_edit resource if can?(:edit, resource)
+        = button_to_activate_or_deactivate(resource) if can?(:deactivate, resource)
+    .campaign-brands
+      = resource.brands.map(&:name).to_sentence
+
+    span
+      - if resource.has_date_range? || resource.first_event_at || resource.last_event_at
+        .calendar-data
+          - if resource.has_date_range?
+            i.icon-calendar
+            = presenter.date_range
+          - else
+            i.icon-calendar
+            = presenter.date_range
+
+      - if resource.description.present?
+        .description-data
+          span
+            = resource.description
+
+    // This info will be displayed on the fixed bar when the window is scolled down to this position
+    .details-bar-info
+      span.primary-info
+        = resource.name
+      span.secondary-info
+        - if resource.has_date_range?
+          = presenter.date_range
+        - else
+          = presenter.date_range
+      = button_to_edit resource if can?(:edit, resource)
+      = button_to_activate_or_deactivate(resource) if can?(:deactivate, resource)
+
+  ul#campaign-tabs.nav.nav-tabs
+    - if can?(:show, resource)
+      li id="campaign-builder-tab"
+        a href="#campaign-builder" data-content="#{tab_campaign_path(resource, :campaign_builder)}" Campaign Builder
+    - if can?(:view_event_form, resource)
+      li id="activity-builder-tab"
+        a href="#activity-builder" data-content="#{tab_campaign_path(resource, :activity_builder)}" Activity Builder
+    - if can?(:view_kpis, resource)
+      li
+        a href="#kpis_tab" data-content="#{tab_campaign_path(resource, :kpis)}" KPIs
+    - if can?(:view_places, resource)
+      li
+        a href="#campaign-places-list" data-content="#{tab_campaign_path(resource, :places)}" Places
+    - if can?(:view_staff, resource)
+      li
+        a href="#staff_tab" data-content="#{tab_campaign_path(resource, :staff)}" Staff
+    - if can?(:view_date_ranges, resource)
+      li
+        a href="#date_ranges_tab" data-content="#{tab_campaign_path(resource, :date_ranges)}" Date ranges
+    - if can?(:view_day_parts, resource)
+      li
+        a href="#day_parts_tab" data-content="#{tab_campaign_path(resource, :day_parts)}" Day parts
+    - if can?(:view_documents, resource)
+      li
+        a href="#documents_tab" data-content="#{tab_campaign_path(resource, :documents)}" Documents
+
+  .tab-content
+    - if can?(:show, resource)
+      #campaign-builder.tab-pane.campaigns_box
+
+    - if can?(:view_event_form, resource)
+      #activity-builder.tab-pane.campaigns_box
+
+    - if can?(:view_kpis, resource)
+      #kpis_tab.tab-pane.campaigns_box
+
+    - if can?(:view_places, resource)
+      #campaign-places-list.tab-pane.campaigns_box
+
+    - if can?(:view_staff, resource)
+      #staff_tab.tab-pane.campaigns_box
+
+    - if can?(:view_date_ranges, resource)
+      #date_ranges_tab.tab-pane.campaigns_box
+
+    - if can?(:view_day_parts, resource)
+      #day_parts_tab.tab-pane.campaigns_box
+
+    - if can?(:view_documents, resource)
+      #documents_tab.tab-pane.campaigns_box
+
+= render partial: 'help_tutorial'
+
+- content_for :footer do
+  javascript:
+    $('#campaign-tabs a').click(function (e) {
+      e.preventDefault();
+      $(this).tab('show');
+    });
+
+    $('#campaign-tabs a[data-content]').on('show', function(e){
+      $target = $(e.target);
+      $content = $('.tab-content ' + $target.attr('href'));
+      $content.html('<img src="#{asset_path('loading.gif')}" />')
+      $content.load($target.data('content'), function() {
+        $.publish('campaign-tabs.show');
+      });
+    });
+
+    $('ul#campaign-tabs li:first a').tab('show');
+
+    //$('#campaign-tabs a[data-content]').first().trigger('show');
+
+    $(document).on('kpis:change', function(){
+      $('.tab-content #kpis_tab').load('#{tab_campaign_path(resource, :kpis)}')
+    });
+
+    $(document).on('activity_types:change', function(){
+      $('.tab-content #kpis_tab').load('#{tab_campaign_path(resource, :kpis)}')
+    });
+
+    $(document).on('staff:change', function(){
+      $('.tab-content #staff_tab').load('#{tab_campaign_path(resource, :staff)}')
+    });
+
+    $(document).on('member:delete', function(e, member_id){
+      $('#goal-company_user-'+member_id).remove()
+    });
+
+    $(document).on('team:delete', function(e, team_id){
+      $('#goal-team-'+team_id).remove()
+    });
+
+    $(document).on('areas:change', function(){
+      $('.tab-content #campaign-places-list').load('#{tab_campaign_path(resource, :places)}')
+    });
+
+    $(document).on('date_ranges:change', function(){
+      $('.tab-content #date_ranges_tab').load('#{tab_campaign_path(resource, :date_ranges)}')
+    });
+
+    $(document).on('day_parts:change', function(){
+      $('.tab-content #day_parts_tab').load('#{tab_campaign_path(resource, :day_parts)}')
+    });
+
+    $(document).on('documents:change', function(){
+      $('.tab-content #documents_tab').load('#{tab_campaign_path(resource, :documents)}')
+    });
+
+  - reload_page_on_edit_resource

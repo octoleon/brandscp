@@ -1,0 +1,11 @@
+div.resource-item id="team_#{team.id}" class="#{active_class(team)}"
+  = link_to_if_permitted :show, Team, team_path(team), class: 'resource-item-link' do
+    .span7
+      .text-large= team.name
+      .crop-text= team.description
+    .span5
+      .text-large= team.users.active.count
+      | Members
+  div.resource-item-actions
+    = button_to_edit team if can?(:edit, Team)
+    = button_to_activate_or_deactivate(team) if can?(:deactivate, Team)

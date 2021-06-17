@@ -1,0 +1,99 @@
+- content_for :alerts
+  div.collection-list-description
+    .filter-label
+    .filter-buttons
+
+
+= user_new_feature('events_list') do
+  h5 Getting Started: Events
+  a.close.btn-dismiss-alert.icon.icon-close href="#" title="Dismiss"
+  a.video-thumbnail href="#" title="Play Video" data-video="//www.youtube.com/embed/ZWONrCYET_g?rel=0" data-width="640" data-height="360"
+    img src="#{image_path('video_arrow.png')}" width="70" height="70" /
+  .feature-description
+    p
+      'The Events module is your one-stop-shop for viewing and managing events - start to finish . Create events, track event status, fill out post event forms, as well as submit, reject, and approve your reports. Click on the video to the left for a quick overview or visit our
+      a> href="http://support.app.com" target="_blank" support site
+      | for more information about this section.
+
+.sidebar.collapsed#resource-filter-column
+  #collection-list-filters
+
+.main
+  #list-tools
+    .pull-left
+      = button_to 'New Event', new_event_path, {method: :get, remote: true, class: 'btn btn-primary', :id => 'new-event-btn'} if can? :create, Event
+
+    .text-right
+      .dropdown.btn-download
+        a.btn.dropdown-toggle href="#" data-toggle="dropdown" data-target="#" title="Download"
+          i.icon-download
+          i.icon-arrow-down-small
+        ul.dropdown-menu.download-options-menu role="menu" aria-labelledby="dLabel"
+          li
+            a.xlsx-download-link href="#" role="menuitem" data-url="#{events_path(format: :csv)}"
+              | Download as CSV
+          li
+            a#pdf-export.xlsx-download-link href="#" role="menuitem" data-url="#{events_path(format: :pdf)}"
+              | Download as PDF
+
+      - if can?(:view_map, Event) || can?(:view_list, Event) || can?(:view_calendar, Event)
+        #toggle-events-view.btn-group
+          - if can?(:view_list, Event)
+            a.btn.active.list href="#list-view" data-toggle="tab" title="List View"
+              i.icon-list
+          - if can?(:view_calendar, Event)
+            a.btn.calendar href="#calendar-view" data-toggle="tab" title="Calendar View"
+              i.icon-grid
+          - if can?(:view_map, Event)
+            a.btn.map href="#map-view" data-toggle="tab" title="Map View"
+              i.icon-venue
+  .tab-content
+    - if can?(:view_list, Event)
+      #list-view.tab-pane.active
+        div#events-list.resource-list
+
+    - if can?(:view_calendar, Event)
+      #calendar-view.tab-pane
+        #calendar-canvas data-events-url="#{calendar_events_path(format: :json)}"
+
+    - if can?(:view_map, Event)
+      #map-view class="tab-pane #{can?(:view_list, Event) ? '' : 'active'}"
+        #map-canvas.google-map
+
+= render partial: 'help_tutorial'
+
+- if can?(:view_list, Event)
+  javascript:
+    $('#collection-list-filters').filteredList({
+      'source': '#{url_for(controller: :events, action: :items)}',
+      'filtersUrl': '#{filter_url(:events)}',
+      'listContainer' : '#events-list',
+      'sorting': 'start_at',
+      'sorting_dir': 'asc',
+      'includeCalendars': true,
+      'calendarHighlights': #{calendar_highlights.to_json.html_safe},
+      'selectDefaultDate': false,
+      'selectDefaultDateRange': false,
+      'ytdDatesRange': '#{current_company.ytd_dates_range}',
+      'includeAutoComplete': true,
+      'autoCompletePath': '#{autocomplete_path(:events, format: :json)}',
+      'userFilters': #{user_saved_filters(controller_name).to_json.html_safe},
+      'defaultParams': '#{j default_params_for_view('status[]=Active&start_date[]=' + Time.zone.now.strftime("%m/%d/%Y") + '&end_date[]=' + (Time.zone.now + 10.years).strftime("%m/%d/%Y"))}',
+      'applyTo': '#{controller_name}',
+      'onChange': function(filterBox){
+        $(document).trigger('events-filter:changed')
+      },
+      'emptyStateMessage': '#{j t("events.empty.line1", scope: :blank_states) }',
+      'emptyStateMessageLine2': '#{j t("events.empty.line2.with#{can?(:create, Event) ? '' : 'out'}_schedule_permissions", scope: :blank_states) }',
+      'emptyFilterResultsMessage': '#{j t("events.filters.line1", default: :filters_line1, scope: :blank_states) }',
+      'emptyFilterResultsMessageLine2': '#{j t("events.filters.line2", default: :filters_line2, scope: :blank_states) }',
+      'emptyStateImage': '#{asset_path('blank-events.png')}',
+      'canCreatePermission': #{can?(:create, Event)}
+    });
+
+javascript:
+  $(document).on('events:change', function(){
+    $.get('#{calendar_dates_events_path(format: :json)}', function(response) {
+      $('#collection-list-filters').filteredList('setCalendarHighlights', response)
+    })
+  })

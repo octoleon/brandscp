@@ -1,0 +1,6 @@
+- if resource.errors.any?
+  - if parent.present? && parent.is_a?(Event)
+    | window.EventDetails.showMessage('#{resource.errors.full_messages.first}', 'red');
+- else
+  - render 'settings'
+  = render 'form_dialog'

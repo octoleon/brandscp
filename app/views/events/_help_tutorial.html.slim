@@ -1,0 +1,55 @@
+- content_for :help_title do
+  - if params[:id].present?
+    | The Event Details area shows all of the information related to a specific event. Based on whether the event is upcoming or in the past, this area will display different information that is most pertinent to you at that point in time.
+  - else
+    | The Events list area shows all events that you are associated with and can be used to view and schedule events for your campaigns
+- content_for :help_title_map do
+  | The Events map area visually displays all events that you are associated with and can be used to view and schedule events for your campaigns
+.help-overlay-definitions
+  //For index
+  div data-target="#application-content" data-intro="Click anywhere or press Esc to close" data-position="top" data-element-class="chardinjs-keep-back" data-tooltip-style="top: -30px;"
+  div data-target="#events-list li:nth-child(6) a.edit" data-intro="Edit an event" data-position="left" data-tooltip-style="left:-18px; bottom:-7px; height:30px"
+  div data-target="#events-list li:nth-child(6) a.disable" data-intro="Deactivate or reactivate an event" data-position="bottom" data-tooltip-style="width: 150px; left: -58px; bottom: -71px;"
+  div data-target="#events-list li:nth-child(6) a.enable" data-intro="Deactivate or reactivate an event" data-position="bottom" data-tooltip-style="width: 150px; left: -60px; bottom: -100px;"
+  div data-target="#new-event-btn" data-intro="Schedule an event for your campaign" data-position="right" data-tooltip-style="top: -3px; right: -116px;"
+  div data-target="#download-excel-btn" data-intro="Download the currently displayed events list to Excel" data-position="left" data-tooltip-style="top: -12px; left: -123px;"
+  div data-target="#toggle-events-view" data-intro="Toggle between list view, calendar view and map view" data-position="top" data-tooltip-style="left: -65px; top: -55px; width: 190px; bottom: 104px;"
+  div data-target="#events-list" data-intro="View all of your events in the events list" data-position="right" data-helper-class="chardinjs-dashed" data-element-class="chardinjs-keep-back" data-tooltip-style="left: 45px; top: 90px;"
+  div data-target="#search-box-filter" data-intro="Search for specific events" data-position="top" data-tooltip-style="left: 10px; top: -54px; width: 150px;"
+  div data-target=".dates-range-filter" data-intro="Days that have events scheduled are indicated with a grey dot. Click and drag to see events taking place within a selected date range." data-position="left" data-helper-class="chardinjs-dashed" data-element-class="chardinjs-keep-back" data-tooltip-style="top: 23.5px; left: -127px;"
+  div data-target=".form-facet-filters" data-intro="Filter the events list by selecting multiple criteria" data-position="left" data-helper-class="chardinjs-dashed" data-element-class="chardinjs-keep-back" data-tooltip-style="top: 140px; left: -134px;"
+  div data-target="#save-filters-btn" data-intro="Save filtering combinations that you use regularly" data-position="left" data-tooltip-style="top: -13px; left: -124px;"
+  div data-target="#map-view" data-intro="Pins visually identify where events are taking place. Click on a pinned location to see a brief summary of the event" data-position="bottom" data-tooltip-style="bottom: -132px; left: 473px;" data-element-class="chardinjs-keep-back"
+  div data-target=".calendar-table" data-intro="Click on any brand or date on the calendar to view a filtered list of these events" data-position="top" data-helper-class="chardinjs-dashed" data-tooltip-style="left: 425px; top: -95px;" data-element-class="chardinjs-keep-back"
+  div data-target=".calendar-day" data-intro="Events are grouped by brand while in calendar view" data-position="right" data-tooltip-style="top: 34px; right: -108px;"
+
+  //For show
+  div data-target="#venue-map-canvas" data-intro="The map at the top of the screen shows where an event is taking place" data-position="bottom" data-helper-class="chardinjs-dashed" data-element-class="chardinjs-keep-back" data-tooltip-style="left: 230px; top: 70px;"
+  div data-target=".show .alert" data-intro="See the status of your event. This will change throughout the lifecycle of the event to show you the most relevant information" data-position="bottom" data-tooltip-style="right: 150px; top: 106px;"
+  div data-target=".place-data" data-intro="See critical information about an event including when and where the event is taking place" data-position="right" data-element-class="chardinjs-keep-back" data-tooltip-style="top: -65px; right: -20px;"
+  div data-target="#event-members" data-intro="View team members assigned to the event. Add team members using the + button" data-position="top" data-element-class="chardinjs-keep-back" data-tooltip-style="right: 472px; top: -32px; width: 180px;"
+  div data-target="#event-results-form .controls" data-intro='Fill out the fields below after you complete your event. Be sure to click "Save" once you are done' data-position="top" data-element-class="chardinjs-keep-back" data-tooltip-style="top: -142px; left: 550px;"
+  div data-target=".box_summary" data-intro="A summary of event outcomes from field staff" data-position="top" data-element-class="chardinjs-keep-back" data-tooltip-style="top: -12px; left: 150px;"
+  div data-target=".box_metrics" data-intro="Event performance against stated key performance indicators (KPIs)" data-position="top" data-element-class="chardinjs-keep-back" data-tooltip-style="top: -93px; left: 95px;"
+  div data-target="#demographics" data-intro="The age, gender and racial profile of event attendees" data-position="top" data-element-class="chardinjs-keep-back" data-tooltip-style="top: -78px; left: 135px;"
+  div data-target="#event-expenses, #event-expenses-container" data-intro="Add expenses and receipt scans" data-position="right" data-element-class="chardinjs-keep-back" data-tooltip-style="top: 10px; left: 210px;"
+  div data-target="#event-photos, .box_photos" data-intro='Photos of the event. Click + to upload additional photos' data-position="top" data-element-class="chardinjs-keep-back" data-tooltip-style="top: 15px; left: 200px;"
+  div data-target=".results-surveys" data-intro="View results from any event surveys conducted" data-position="top" data-element-class="chardinjs-keep-back" data-tooltip-style="top: -10px; right: 300px;"
+  div data-target="#question-1-graph" data-intro="Click on a survey response in the legend to hide/show a response category" data-position="right" data-element-class="chardinjs-keep-back" data-tooltip-style="left: 460px; top: -10px; height: 59px; width: 200px"
+  div data-target="#event-comments" data-intro="Add or view comments about the event" data-position="top" data-element-class="chardinjs-keep-back" data-tooltip-style="top: 10px; left: 350px;"
+  div data-target="#event-tasks-counters" data-intro="The task counter area shows how many tasks you have unassigned, assigned, completed or late" data-position="left" data-helper-class="chardinjs-dashed" data-tooltip-style="left:-122px; bottom:15px; height:76px"
+  div data-target="#tasks-list li:nth-child(1) span.task-list" data-intro="The color to the left of the task indicates the status of the current task. Tasks that are past due will be colored red" data-position="top" data-element-class="chardinjs-keep-back" data-tooltip-style="left: -92px; top: -127px; height: 117px; width: 169px"
+  div data-target="#tasks-list li:nth-child(1) #uniform-task_completed" data-intro="Click the checkbox to mark a task as completed" data-position="right" data-tooltip-style="left: 63px; top: -4px; height: 36px; width: 200px"
+  div data-target="#event-documents" data-intro="View documents about this event or campaign" data-position="top" data-element-class="chardinjs-keep-back" data-tooltip-style="top: 10px; left: 350px;"
+  div data-target="#event-contacts" data-intro="View contacts that are relevant to the event. Add contacts using the + button." data-position="top" data-element-class="chardinjs-keep-back" data-tooltip-style="top: -38px; left: 190px;"
+  div data-target="#event-tasks .pull-left" data-intro="Create and assign task to the team members" data-position="right" data-element-class="chardinjs-keep-back" data-tooltip-style="top: -4px; left: 210px; width:164px;"
+  div data-target="#event-activities, #activities-container" data-intro="Make note of any key activities that took place during the event" data-position="right" data-element-class="chardinjs-keep-back" data-tooltip-style="width: 280px; max-width: 300px; top: 15px; left: 210px;"
+
+  div data-target=".filter-label" data-intro="View applied filtering criteria. Click the x icon to remove" data-position="bottom" data-element-class="chardinjs-keep-back" data-tooltip-style="width: 280px; max-width: 300px; top: 120px; left: 55px; padding: 0;"
+
+  div data-target=".calendar-grouping" data-intro="Group events on the calendar by brand, campaign or user" data-position="bottom" data-element-class="chardinjs-keep-back" data-tooltip-style="width: 280px; max-width: 300px; top: 94px; left: -130px;"
+
+  div data-target=".show-hide-filters-link" data-intro="Hide filtering categories for a more concise filtering panel" data-position="left" data-element-class="chardinjs-keep-back" data-tooltip-style="width: 226px; max-width: 300px; top: -16px; left: 2px;"
+
+  div data-target=".settings-for-filters" data-intro="Manage filtering settings" data-position="bottom" data-element-class="chardinjs-keep-back" data-tooltip-style="width: 88px; top: 94px; right: -29px; padding: 0;"
+

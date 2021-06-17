@@ -1,0 +1,56 @@
+.campaign-builder
+  #activities-accordion.accordion
+    .accordion-group
+      .accordion-heading
+        .accordion-toggle data-toggle="collapse" href="#custom-activities" Activities
+
+      #custom-activities.accordion-body.collapse.in
+        - current_company.custom_activity_forms.each do |caf|
+          .activity.custom-activity data-type="custom-activity" data-displayname="#{caf.name}" data-id="#{caf.id}"
+            span.icon-survey
+            | #{caf.name}
+
+    .accordion-group
+      .accordion-heading
+        .accordion-toggle.collapsed data-toggle="collapse" href="#modules-fields" Modules
+
+      #modules-fields.accordion-body.collapse
+        .activity.module data-type="module" data-displayname="Expenses" data-id="1"
+          i.icon-price
+          | Expenses
+        .activity.module data-type="module" data-displayname="Media" data-id="2"
+          i.icon-photo
+          | Media Gallery
+        .activity.module data-type="module" data-displayname="Surveys" data-id="3"
+          i.icon-survey
+          | Surveys
+        .activity.module data-type="module" data-displayname="Comments" data-id="4"
+          i.icon-chat
+          | Comments
+        .activity.module data-type="module" data-displayname="Tasks" data-id="5"
+          i.icon-chat
+          | Tasks
+        .activity.module data-type="module" data-displayname="Contacts" data-id="6"
+          i.icon-chat
+          | Contacts
+        .activity.module data-type="module" data-displayname="Documents" data-id="7"
+          i.icon-chat
+          | Documents
+        - if jbb_feature_enabled?
+          .activity.module data-type="module" data-displayname="Attendance" data-id="8"
+            i.icon-attendance
+            | Attendance
+
+  #campaign-build-zone
+  	#add-phase
+  	  i.icon-plus
+  	  | Add A Phase
+
+  // v1.0 TODO: temporary way to pass data to our makeshift JS-heavy code so it can call on our API
+  // Should still be secure because this page is only accessible via an auth'd user, so you could request any of this info via the API as an auth'd user.
+  #campaign-builder-data data-authtoken="#{current_user.authentication_token}" data-email="#{current_user.email}" data-company="#{current_user.current_company_id}" data-campaign="#{@campaign.id}"
+
+javascript:
+  jQuery(function(){
+    
+  });

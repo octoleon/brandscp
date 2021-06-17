@@ -1,0 +1,24 @@
+- if resource.custom_activity_form_result_headers.where('custom_activity_form_id=?',activity[:id][21..-1]).length == 0
+  a.btn.btn-primary href="#{event_viewer_custom_activity_form_path(activity[:id][21..-1], presenter.id)}" target="_blank"
+    = 'Go To Activity'
+- elsif resource.custom_activity_form_result_headers.where('custom_activity_form_id=?',activity[:id][21..-1]).length == 1
+  a.btn.btn-primary href="#{event_viewer_custom_activity_form_path(activity[:id][21..-1], presenter.id)}" target="_blank"
+    = 'Edit Activity (DEV note: currently creates new)'
+  - resource.custom_activity_form_result_headers.where('custom_activity_form_id=?',activity[:id][21..-1]).first.custom_activity_form_result_details.each do |field|
+    .question
+  	  | Question: #{FormField.find(field.form_field_id).name}
+  	.answer
+  	  | Answer: #{field.result}
+- else
+  a.btn.btn-primary href="#{event_viewer_custom_activity_form_path(activity[:id][21..-1], presenter.id)}" target="_blank"
+    = 'New Entry'
+  .resource-list#caf-results
+    - resource.custom_activity_form_result_headers.where('custom_activity_form_id=?',activity[:id][21..-1]).each_with_index do |result, i|
+      .resource-item id="custom-activity-form-result-header-#{result.id}"
+        .resource-item-link
+          .span4
+            .text-large
+              = "#{i+1}. #{result.updated_at.strftime('%m/%d/%Y')}"
+          .span4
+        	  .text-large
+        	    = "By #{result.user.full_name}"

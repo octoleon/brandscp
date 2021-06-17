@@ -1,0 +1,42 @@
+- resource_class = resource.class.name.underscore.downcase.gsub('/','_')
+- if resource.errors.any?
+  |
+    bootbox.alert('Unknown error')
+- else
+  - unless resource.is_a?(AttachedAsset) || resource.is_a?(Task)
+    | $('.active-toggle-btn-#{resource_class}-#{resource.id}').replaceWith('#{j button_to_activate_or_deactivate(resource, activate_url: params.merge(action: :activate), deactivate_url: params.merge(action: :deactivate))}');
+  |
+    $('##{resource_class}_#{resource.id}').replaceWith('#{escape_javascript(render(resource))}');
+    $(document).trigger('#{resource_class.gsub('_', '-')}:#{resource.active? ? 'activated' : 'deactivated' }', [#{resource.id}]);
+
+  - if resource.is_a?(AttachedAsset) && resource.asset_type == 'photo'
+    - if resource.attachable_type == 'Event'
+      |
+        $('#photos-thumbs ##{resource_class}_#{resource.id}').remove();
+        window.EventDetails.showMessage("#{j I18n.translate('instructive_messages.execute.photo.deactivated')}", 'green');
+
+  - if resource.is_a?(AttachedAsset) && resource.asset_type == 'document' && resource.attachable_type == 'Event'
+    |
+      $('##{resource_class}_#{resource.id}').remove();
+      window.EventDetails.showMessage("#{j I18n.translate('instructive_messages.plan.document.removed')}", 'green');
+
+  - if resource.is_a?(Activity)
+    | window.EventDetails.showMessage("#{j I18n.translate('instructive_messages.execute.activity.deactivated', activity_type: @activity.activity_type.name)}", 'green');
+
+  |
+    var element = $('##{resource_class}_#{resource.id}');
+    if (element.length && !element.data('no-remove-on-deactivate')) {
+      active_checked = $('.form-facet-filters').find('input:checkbox:checked[name="status[]"][value="Active"]').length > 0;
+      inactive_checked = $('.form-facet-filters').find('input:checkbox:checked[name="status[]"][value="Inactive"]').length > 0;
+      if (active_checked != inactive_checked || $('.form-facet-filters').find('input:checkbox[name="status[]"][value="Inactive"]').length == 0) {
+        element.remove();
+      }
+    };
+
+  - if resource.is_a?(Task)
+    - if resource.event_id.present?
+      |
+        $('#event-tasks').html('#{j render(partial: 'events/tasks', locals: { resource: resource.event }) }');
+        window.EventDetails.showMessage("#{j I18n.translate('instructive_messages.plan.task.deactivated')}", 'green');
+    - else
+      | $(document).trigger('tasks:change');

@@ -1,0 +1,8 @@
+- if @brand.id
+  |
+    $(document).trigger('brands:change');
+    if ($('ul#brands-list > li#brand-#{@brand.id}').length){
+      $('ul#brands-list > li#brand-#{@brand.id}').remove();     
+    };
+
+= render 'add_brand'

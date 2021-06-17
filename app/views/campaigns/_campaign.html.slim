@@ -1,0 +1,17 @@
+- hide_actions ||= false
+div.resource-item id="campaign_#{campaign.id}" class="#{active_class(campaign)}"
+  = link_to_if_permitted :read, Campaign, campaign_path(campaign), class: 'resource-item-link' do
+    .span6
+      span.text-large= campaign.name
+      .crop-text
+        = campaign.description
+    .span3.first
+      .date= format_date campaign.first_event_at
+      | First event
+    .span3.last
+      .date= format_date campaign.last_event_at
+      | Last event
+  - unless hide_actions
+    div.resource-item-actions
+      = button_to_edit campaign if can?(:edit, Campaign)
+      = button_to_activate_or_deactivate(campaign) if can?(:deactivate, Campaign)

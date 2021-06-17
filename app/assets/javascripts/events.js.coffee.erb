@@ -1,0 +1,323 @@
+jQuery ->
+	$(document).delegate ".task-completed-checkbox", "click", ->
+		$(@form).submit()
+
+	EventDetails = ->
+		this.closeAlertTimeout = false
+
+		$('.event-alert').find('.close').show().on 'click', =>
+			this.permanentMessageOpen = false
+
+		$(document).on 'click', '.event-alert', (e) ->
+			e.stopPropagation()
+
+		this.showMessage = (message, color, close = false, important = false) ->
+			return if this.permanentMessageOpen
+			$('.event-alert').find('.close').hide()
+			clearTimeout this.closeAlertTimeout if this.closeAlertTimeout
+			$('.event-alert').removeClass (index, css) ->
+				(css.match(/(^|\s)alert-\S+/g) or []).join ' '
+			$('.event-alert').addClass('alert-' + color).find('.alert-main-text').html(message)
+			if close
+				this.showPermanentMessage()
+			else
+				this.showMessageWithAutoClose()
+				if important
+					this.permanentMessageOpen = true
+			true
+
+		this.showPermanentMessage = () ->
+			this.permanentMessageOpen = true
+			$('.event-alert').slideDown('fast').find('.close').show()
+
+		this.showMessageWithAutoClose = (time = 3000, duration='fast') ->
+			$('.event-alert').slideDown(duration)
+			this.closeAlertTimeout = setTimeout ->
+				window.EventDetails.permanentMessageOpen = false
+				$('.event-alert').slideUp(duration)
+			, time
+
+		this.closeMessage= (duration = 'fast') ->
+			$('.event-alert').slideUp(duration)
+		@
+
+	window.EventDetails = new EventDetails()
+
+	$(document)
+		.on 'click', '.event-phase-step', (e) ->
+			if not $(this).hasClass('smooth-scroll')
+				e.preventDefault()
+				e.stopPropagation()
+				window.EventDetails.showMessage($(this).data('message'), $(this).data('message-color'))
+			else
+				window.EventDetails.closeMessage('fast')
+				$('#phases-container .phase-container:not(.active)').slideUp()
+		.on 'smooth-scroll:end', '.event-phase-step', (e) ->
+			$('#phases-container').scrollmultispy('activate',[$(this).data('spytarget'), $('#phases-container')[0]])
+			if $(this).data('message')
+				window.EventDetails.showMessage($(this).data('message'), $(this).data('message-color'))
+
+	$('.btn-dismiss-alert').on 'click', (e) ->
+		$('.event-alert').slideUp()
+		$('.event-alert .close').hide()
+
+	$('#phases-container .phase-container').on 'click', (e) ->
+		if !$(e.target).hasClass('.event-phase-step') && $(e.target).closest('.event-phase-step').length == 0
+			$('#phases-container .phase-container:not(.active)').slideDown()
+
+	$('#toggle-phases-steps').on 'click', (e) ->
+		e.preventDefault()
+		window.EventDetails.closeMessage('fast')
+		$('#phases-container .phase-container:not(.active)').slideToggle()
+		false
+
+	$(document).on 'click', (e) ->
+		if not $(e.target).hasClass('.phase-container') && $(e.target).closest('.phase-container').length == 0
+			$('#phases-container .phase-container:not(.active)').slideUp()
+		else
+
+
+	$("#reject-post-event").submit (e) ->
+		e.preventDefault()
+		$form = $(this)
+		bootbox.classes('modal-med rejection-prompt')
+		bootbox.prompt "Why is the post event being rejected?", 'Cancel', 'Submit', (result) ->
+			if result isnt null and result isnt ""
+				$.ajax $form.attr("action"),
+					method: "PUT"
+					dataType: "script"
+					data:
+						reason: result
+			else if result isnt null
+				bootbox.alert "You must enter a reason for the rejection", ->
+					$form.submit()
+
+		false
+
+	$('#approve-event-button, #reject-event-button').on 'click', (e) ->
+		window.EventDetails.showMessage($(this).data('message'), 'red')
+
+	$(document).delegate 'a.load-comments-link', 'click', (e) ->
+		$row = $(this).parents('li');
+		if $("##{$row.attr('id')}_comments").length > 0
+			$("##{$row.attr('id')}_comments").toggle()
+			e.stopImmediatePropagation()
+
+		else
+			$(this).removeAttr('data-remote')
+
+		e.preventDefault();
+		return false
+
+
+	$('.step.actions').on 'ajax:before.event_data', () ->
+		form = $('form.event-data-form')
+		if form.length
+			if form.valid()
+				$(document).off('ajaxComplete.event_data').on 'ajaxComplete.event_data', (event, xhr, settings) ->
+					$(document).off('ajaxComplete.event_data')
+					$('.step-buttons').off('ajax:before.event_data')
+					$('.submit-event-data-link').trigger('click')
+				form.submit()
+			false
+		else
+			true
+
+
+	mapIsVisible = false
+	calendarIsVisible = false
+	calendarCreated = false
+	# EVENTS INDEX
+
+	window.createCalendar = (month = null, year = null, groupBy = null) ->
+		$('#calendar-canvas').eventsCalendar
+			month: month
+			year: year
+			groupBy: groupBy
+			eventsUrl: () ->
+				url = $('#calendar-canvas').data('events-url')
+				url += (if url.indexOf('?') >= 0 then '&' else '?') + $('#collection-list-filters').filteredList('paramsQueryString')
+				url
+			renderMonthDay: (day) ->
+				date = "#{day.getMonth()+1}/#{day.getDate()}/#{day.getFullYear()}"
+				"<a class=\"cal-day-link\" data-date=\"#{date}\" href=\"#{document.location.protocol}//#{document.location.host}/events?start_date=#{date}&end_date=\">#{day.getDate()}</a>"
+			onEventsLoad: () ->
+				$('#pdf-export').data('url', "/events.pdf?mode=calendar&month=#{$('#calendar-canvas').eventsCalendar('getMonth')}&year=#{$('#calendar-canvas').eventsCalendar('getYear')}&group_by=#{$('#calendar-canvas').eventsCalendar('getGroupBy')}")
+				setTimeout () ->
+					window.status='completed';
+				, 100
+			onMonthChange: (month, year) ->
+				$('#pdf-export').data('url', "/events.pdf?mode=calendar&month=#{month}&year=#{year}&group_by=#{$('#calendar-canvas').eventsCalendar('getGroupBy')}")
+			onGroupChange: (groupBy) ->
+				$('#pdf-export').data('url', "/events.pdf?mode=calendar&month=#{$('#calendar-canvas').eventsCalendar('getMonth')}&year=#{$('#calendar-canvas').eventsCalendar('getYear')}&group_by=#{groupBy}")
+
+
+	$('#toggle-events-view a').on 'click', ->
+		$('#toggle-events-view a').removeClass 'active'
+		$(this).addClass('active').tab 'show'
+		if $(this).attr('href') is '#map-view'
+			$('#pdf-export').data('url', '/events.pdf');
+			mapIsVisible = true
+			calendarIsVisible = false
+			$('.help-title').hide()
+			$('.help-title-map').show()
+			$('body.events.index #collection-list-filters').filteredList 'disableScrolling'
+			$('.dates-range-filter').slideDown()
+			$('.dates-pref').slideDown()
+			$('.collection-list-description').find('[data-filter="date"]').closest('.filter-item').show()
+			initializeMap()
+		else if $(this).attr('href') is '#calendar-view'
+			$('#pdf-export').data('url', '/events.pdf?mode=calendar')
+			$('.dates-range-filter').slideUp()
+			$('.dates-pref').slideUp()
+			$('.collection-list-description').find('[data-filter="date"]').closest('.filter-item').hide()
+			calendarIsVisible = true
+			mapIsVisible = false
+			$('.help-title').show()
+			$('.help-title-map').hide()
+			$('body.events.index #collection-list-filters').filteredList 'disableScrolling'
+			if not calendarCreated
+				calendarCreated = true
+				window.createCalendar();
+				# When the user clicks on the calendar day
+				$('#calendar-canvas').off('click.eventsCalendar').on 'click.eventsCalendar', '.cal-day-link', (e) ->
+					date = $(this).data('date')
+					$('#collection-list-filters').filteredList('setDates', [date, date])
+					$('#toggle-events-view a[href="#list-view"]').click()
+					false
+
+				# When the filters change
+				$('#collection-list-filters').off('filters:changed.eventsCalendar').on 'filters:changed.eventsCalendar', () ->
+					if calendarIsVisible
+						$('#calendar-canvas').eventsCalendar 'loadEvents'
+			else
+				$('#calendar-canvas').eventsCalendar 'loadEvents'
+		else
+			$('#pdf-export').data('url', '/events.pdf');
+			$('.dates-range-filter').slideDown()
+			$('.dates-pref').slideDown()
+			$('.collection-list-description').find('[data-filter="date"]').closest('.filter-item').show()
+			mapIsVisible = false
+			calendarIsVisible = false
+			$('.help-title').show()
+			$('.help-title-map').hide()
+			$('.table-cloned-fixed-header').show()
+			$('body.events.index #collection-list-filters').filteredList 'enableScrolling'
+
+	map = null
+	markersArray = []
+	events = null
+	markerCluster = false
+
+	initializeMap = ->
+		if not map
+			mapOptions = {
+				zoom: 5,
+				mapTypeId: google.maps.MapTypeId.ROADMAP
+			}
+			map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions)
+
+			map.setOptions {styles: window.MAP_STYLES}
+		else
+			google.maps.event.trigger map, 'resize'
+		fecthAndPlaceMarkers()
+
+	$(document).on 'events-filter:changed', (e) ->
+		if mapIsVisible
+			fecthAndPlaceMarkers()
+
+
+	fecthAndPlaceMarkers = ->
+		params = $('#collection-list-filters').filteredList('getFilters');
+		params.push {name: 'per_page', value: '500'}
+		$.getJSON '/events/map.json', params, (events) ->
+			placeMarkers(map, events)
+
+	window.placeMarkers = (map, events) ->
+		if map
+			for marker in markersArray
+				marker.setMap null
+
+			markersArray = []
+
+			bounds = new google.maps.LatLngBounds()
+
+			pinImage = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|de4d43",
+				new google.maps.Size(21, 34),
+				new google.maps.Point(0,0),
+				new google.maps.Point(10, 34));
+
+			for event in events
+				if event.place? and event.place.latitude? and event.place.latitude != ''
+					placeLocation = new google.maps.LatLng(event.place.latitude,event.place.longitude)
+					marker = new google.maps.Marker({
+						draggable:false,
+						icon: pinImage,
+						title: event.place.name,
+						animation: google.maps.Animation.DROP,
+						position: placeLocation
+					})
+					markersArray.push marker
+
+					marker.theInfowindow = new google.maps.InfoWindow {
+							content: $('<div>')
+											.append($('<b>').append(if event.campaign? then event.campaign.name else ''))
+											.append($('<br>')).append(event.formatted_date)
+											.append($('<br>')).append(if event.place? then event.place.name + '<br>' + event.place.formatted_address else '')
+											.append($('<br>')).append($('<a>', {'href': event.links.show}).text('View Details'))
+											.append('\xA0\xA0').append($('<a>', {'href': event.links.edit, 'data-remote': true}).text('Edit Event')).html()
+					}
+
+					google.maps.event.addListener marker, 'click', () ->
+						for marker in markersArray
+							marker.theInfowindow.close()
+
+						this.theInfowindow.open map, this
+
+					# Automatically center/zoom the map according to the markers :)
+					bounds.extend marker.position
+
+
+			if events.length > 0
+				zoomChangeBoundsListener = google.maps.event.addListener(map, 'bounds_changed', (event) ->
+						google.maps.event.removeListener(zoomChangeBoundsListener)
+						if (this.getZoom() > 13 && this.initialZoom == true)
+							this.setZoom 13
+							this.initialZoom = false
+				)
+				map.initialZoom = true;
+				map.fitBounds bounds
+
+				if markerCluster
+					markerCluster.clearMarkers()
+
+				markerCluster = new MarkerClusterer(map, markersArray, {styles: clusterStyles = [
+						{
+							textColor: 'white',
+							url: '<%= asset_path('small-bubble.png'); %>',
+							height: 50,
+							textSize: 11,
+							width: 50
+						},
+						{
+							textColor: 'white',
+							url: '<%= asset_path('medium-bubble.png'); %>',
+							height: 50,
+							textSize: 11,
+							width: 50
+						},
+						{
+							textColor: 'white',
+							url: '<%= asset_path('big-bubble.png'); %>',
+							height: 50,
+							textSize: 11,
+							width: 50
+						}
+					];
+
+				})
+
+
+	if $('#map-view').hasClass('active')
+		mapIsVisible = true
+		initializeMap()

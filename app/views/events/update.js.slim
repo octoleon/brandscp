@@ -1,0 +1,21 @@
+- render 'settings'
+- if resource.errors.any?
+  - if params['partial'] == 'event_data'
+    | bootbox.alert('#{j resource.errors.full_messages.join("<br />").html_safe }')
+  - else
+    = render 'form_dialog'
+- else
+  - if params['partial'] == 'event_data'
+    = update_event_details_bar(resource)
+    = valid_to_submit_message(resource)
+    |
+      $('#edit_event_data_form').remove();
+      $('.box_event_data').html("#{escape_javascript(render(partial: 'results_event_data', locals: {url_return_path: "#{return_path || collection_path}" }))}").show();
+      window.EventDetails.showMessage("#{j I18n.translate('instructive_messages.execute.per.completed')}", 'green');
+      smoothScrollTo($('#event-per'));
+      setTimeout(function(){ $(window).resize() });
+  - else
+    |
+      $('.bootbox.modal').modal('hide');
+      $('##{resource.class.name.underscore}_#{resource.id}').replaceWith('#{escape_javascript(render(resource))}');
+      $(document).trigger('#{resource.class.name.pluralize.underscore}:change');

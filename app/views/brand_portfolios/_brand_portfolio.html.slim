@@ -1,0 +1,7 @@
+div.resource-item id="brand_portfolio_#{brand_portfolio.id}" class="#{active_class(brand_portfolio)}"
+  = link_to_if_permitted :show, BrandPortfolio, brand_portfolio_path(brand_portfolio), class: 'resource-item-link' do
+    .text-large= brand_portfolio.name
+    .crop-text= brand_portfolio.description
+  div.resource-item-actions
+    = button_to_edit brand_portfolio if can?(:edit, BrandPortfolio)
+    = button_to_activate_or_deactivate(brand_portfolio) if can?(:deactivate, BrandPortfolio)

@@ -1,0 +1,7 @@
+- if @staff_changed
+  |
+    $(document).trigger('staff:change');
+|
+  selectMemberDialog.modal('hide').remove();
+
+= render 'add_member'

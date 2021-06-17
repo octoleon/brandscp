@@ -1,0 +1,11 @@
+.resource-list.no-top-margin.results-list
+  - result.each do |r|
+    .resource-item
+      .result-name= r[0]
+      .result-value= form_field_type == 'FormField::Number' ? number_with_precision(r[1], precision: 0, delimiter: ',', separator: '.') : number_to_currency(r[1], precision: 2, delimiter: ',', separator: '.')
+
+javascript:
+
+  $('.modal-show-all-results').on('hide' , function() {
+    $('.modal-show-all-results').remove();
+  });

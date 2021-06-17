@@ -1,0 +1,28 @@
+production:
+  solr:
+    hostname: 127.0.0.1
+    port: 8983
+    log_level: WARNING
+    path: /solr/production
+    read_timeout: 10
+    open_timeout: 10
+  auto_commit_after_request: true
+  auto_commit_after_delete_request: true
+
+development:
+  solr:
+    hostname: 127.0.0.1
+    port: 8982
+    log_level: INFO
+    path: /solr/development
+  auto_commit_after_request: true
+  auto_commit_after_delete_request: true
+
+test:
+  solr:
+    hostname: localhost
+    port: 8981
+    log_level: DEBUG
+    path: /solr/test<%= ENV['TEST_ENV_NUMBER'].to_i %>
+  auto_commit_after_request: true
+  auto_commit_after_delete_request: true

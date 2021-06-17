@@ -1,0 +1,8 @@
+.activity-builder
+  .activity-selector
+    .row-fluid
+      .pull-left.custom-activity-button
+        = link_to 'Add Custom Activity', new_custom_activity_form_path, class: 'btn btn-primary' if can?(:view_event_form, resource)
+
+    .custom-activities-list.resource-list
+      = render partial: 'custom_activity_item', collection: current_company.custom_activity_forms, as: :activity

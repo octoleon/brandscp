@@ -1,0 +1,74 @@
+- partial_field_types = ['FormField::Section', 'FormField::Calculation', 'FormField::LikertScale']
+- total_field_types = ['FormField::Number', 'FormField::Currency']
+- partial_porcentage_chart = ['FormField::Percentage', 'FormField::Checkbox', 'FormField::Radio', 'FormField::Dropdown', 'FormField::Brand']
+- if !@campaigns.empty?
+  - if !@kpis_with_values.empty?
+    div.form-results-other
+      h5.results-title
+        = I18n.translate(:'analysis.campaign_summary.title')
+        .info
+          a.icon-info.has-tooltip href="#" title="The report below shows an aggregate summary of all KPIs shared across the campaigns you selected above.  This is further grouped according to the &quot;Group by&quot; selector to the right."
+      .group-by-container
+        .pull-right
+          = I18n.translate(:'analysis.campaign_summary.group_by')
+          = render_navigation context: :campaign_summary, expand_all: true, nav_class: 'nav-pills'
+      - @kpis_with_values.each do |kwv|
+        h5= kwv[:campaigns].pluck(:name).join(', ')
+        - presenter = present(kwv[:campaigns].first)
+        - kwv[:kpi_values].each do |kv|
+          - name = kv[:form_field].kpi.present? ? kv[:form_field].kpi.name.downcase : kv[:form_field].name.downcase
+          - partial_name = ['gender', 'age'].include?(name) ? name : kv[:form_field].type_name.underscore
+          - if partial_field_types.include?(kv[:form_field].type) || partial_name == 'gender' || partial_name == 'age'
+            div.form-result.pdf-keeptogether class="result_#{partial_name}"
+              = render partial: 'form_field_'+partial_name, locals: { form_field: kv[:form_field], result: kv[:values], presenter: presenter }
+          - elsif partial_porcentage_chart.include?(kv[:form_field].type)
+            div.form-result.pdf-keeptogether class="result_percentage"
+              = render partial: 'porcentage_chart', locals: { form_field: kv[:form_field], result: kv[:values] }
+          - elsif total_field_types.include?(kv[:form_field].type)
+            div.form-result.pdf-keeptogether class="result_#{kv[:form_field].type_name.underscore}"
+              = render partial: 'form_field_number', locals: { form_field: kv[:form_field], result: kv[:values], showAll: showAll}
+  - else
+    div= "No common KPIs"
+
+javascript:
+
+  $(document).ready(function() {
+    $('#analysis-campaign').removeClass('loading-spinner');
+    if (#{@campaign_ids.count} > 0 && #{@kpis_with_values.present?}) {
+      id = $('#report_summary_group_by').val() ? $('#report_summary_group_by').val() : 'status';
+      switch(id) {
+        case 'status':
+          title = "#{I18n.translate(:'analysis.campaign_summary.group_status')}";
+          break;
+        case 'campaign':
+          title = "#{I18n.translate(:'analysis.campaign_summary.group_campaign')}";
+          break;
+        case 'area':
+          title = "#{I18n.translate(:'analysis.campaign_summary.group_area')}";
+          break;
+        case 'people':
+          title = "#{I18n.translate(:'analysis.campaign_summary.group_people')}";
+          break;
+        case 'brand_portfolio':
+          title = "#{I18n.translate(:'analysis.campaign_summary.group_portfolio')}";
+          break;
+      }
+      $('#group_by a.dropdown-toggle')[0].innerHTML = title;
+      $('.group-item').removeClass('active');
+      $('#' + id).addClass('active');
+      #{@campaign_ids.count} > 1 ? $('ul.dropdown-menu li#campaign').removeClass('hidden') : $('ul.dropdown-menu li#campaign').addClass('hidden');
+    } else {
+      $('#report_summary_group_by').val('');
+    }
+
+    if ($('.form-results-other').length) {
+      $('.export-xls').removeClass('hidden');
+    } else {
+      $('.export-xls').addClass('hidden');
+    }
+  });
+
+  $('.group-item').on('click', function(e) {
+    $('#report_summary_group_by').val($(this).attr('id'));
+    $('#btn-generate').click();
+  });

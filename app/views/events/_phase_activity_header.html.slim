@@ -1,0 +1,5 @@
+h5.module-title
+  = (defined? activity[:title]) ? activity[:title].upcase : default_text.upcase
+  - if activity[:required]
+    span.module-required-tag
+      = '(Required)'

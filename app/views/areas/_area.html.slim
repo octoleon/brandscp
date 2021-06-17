@@ -1,0 +1,7 @@
+div.resource-item id="area_#{area.id}" class="#{active_class(area)}"
+  = link_to_if_permitted :show, Area, area_path(area), class: 'resource-item-link' do
+    .text-large= area.name
+    .crop-text= area.description
+  div.resource-item-actions
+    = button_to_edit area if can?(:edit, Area)
+    = button_to_activate_or_deactivate(area) if can?(:deactivate, Area)

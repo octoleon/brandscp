@@ -1,0 +1,8 @@
+.resource-list.select-list
+  - @day_parts.each do |day_part|
+    .resource-item id="day-part-#{day_part.id}"
+      .resource-item-link
+        .text-large= day_part.name
+        = day_part.description
+      .resource-item-actions
+        = link_to '', add_day_part_campaign_path(resource, day_part_id: day_part.id), id: "add-day-part-btn-#{day_part.id}", data: {'day-part-id' => day_part.id}, class: 'icon-plus-sign', remote: true, method: :post

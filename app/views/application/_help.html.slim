@@ -1,0 +1,77 @@
+#help-modal.modal.hide.fade.resource-form-modal
+  .modal-header
+    button.close aria-hidden="true" data-dismiss="modal" type="button"
+    h3 Help
+  .modal-body.help
+    .help-title
+      p
+        = yield :help_title
+    .help-title-map
+      p
+        b= yield :help_title_map
+    .help-item.faqs
+      .help-name FAQs
+      p List 5 of the most common FAQs that pertain to the current section/page. Below the top 5 FAQs, show a "more..." link. Clicking on any of the FAQs will open the answer to the FAQ on the desk.com support site. Clicking on the "more..." link will direct users to the full FAQ list on the desk.com support site.
+
+    .help-item.overview
+      .help-name 1. OVERVIEW TUTORIAL
+      p View an overlay tutorial that guides you through the interface of the current screen.
+      = link_to 'View tutorial', '#', id: 'view_tutorial', class: 'btn btn-primary'
+
+    .help-item.support
+      .help-name 2. BROWSE SUPPORT SITE
+      p Visit the App support site to get answers to commonly asked questions.
+      = link_to 'Visit support', 'http://support.app.com', id: 'visit_support', target: '_blank', class: 'btn btn-primary'
+
+    .help-item
+      .help-name 3. CONTACT A REPRESENTATIVE
+      p Contact an Account Manager directly.
+      javascript:
+        new DESK.Widget({
+          version: 1,
+          site: 'support.app.com',
+          port: '80',
+          type: 'chat',
+          displayMode: 1,
+          features: {
+            offerAlways: false,
+            offerAgentsOnline: true,
+            offerRoutingAgentsAvailable: false,
+            offerEmailIfChatUnavailable: true
+          },
+          fields: {
+            ticket: {
+              desc: '',
+              labels_new: '',
+              priority: '',
+              subject: '',
+              email: '#{ current_user.email }',
+              first_name: '#{ current_user.first_name }',
+              last_name: '#{ current_user.last_name }',
+              title: '#{ current_company_user.role_name}',
+            },
+            interaction: {
+              email: '#{j current_user.email}',
+              name: '#{j current_user.full_name}'
+            },
+            chat: {
+              subject: ''
+            },
+            customer: {
+              company: '#{j current_company.name}',
+              desc: 'The user clicked the help link from #{request.original_url}',
+              first_name: '#{j current_user.first_name}',
+              last_name: '#{j current_user.last_name}',
+              locale_code: '',
+              title: '#{j current_company_user.role_name}'
+            }
+          }
+        }).render()
+    .modal-footer
+
+javascript:
+  $('.overview').click(function(){
+    $('#help-modal').modal('hide');
+    $('body').chardinJs('start');
+    return false
+  })
